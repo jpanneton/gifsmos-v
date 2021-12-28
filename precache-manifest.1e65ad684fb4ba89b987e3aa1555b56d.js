@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "ea0f3f893a1c8c23b33c",
-    "url": "/gifsmos-v/static/css/main.62dfe283.chunk.css"
+    "revision": "e6eb2518985eaeed3be6",
+    "url": "/gifsmos-v/static/css/main.937eb701.chunk.css"
   },
   {
-    "revision": "ea0f3f893a1c8c23b33c",
-    "url": "/gifsmos-v/static/js/main.ea0f3f89.chunk.js"
+    "revision": "e6eb2518985eaeed3be6",
+    "url": "/gifsmos-v/static/js/main.e6eb2518.chunk.js"
   },
   {
     "revision": "80ca1bf7719e2a27e3cb",
@@ -56,7 +56,7 @@ self.__precacheManifest = [
     "url": "/gifsmos-v/static/media/right.1e9a60e1.svg"
   },
   {
-    "revision": "ece18e4dc31d787fdbf2d5387fb9120d",
+    "revision": "eec563ff76e0d6050e4544145000f201",
     "url": "/gifsmos-v/index.html"
   }
 ];
