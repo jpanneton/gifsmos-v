@@ -101,7 +101,7 @@ class Settings extends Component {
           </select>
         </div>
 
-        <div>
+        <div className="disabled-feature">
           <input
             type="checkbox"
             name="oversample"

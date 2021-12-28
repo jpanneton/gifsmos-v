@@ -81,7 +81,7 @@ class GenerateGifForm extends Component {
           value={this.props.gifFileName}
         />
         <input
-          className="GenerateGifForm-input GenerateGifForm-hidden"
+          className="GenerateGifForm-input disabled-feature"
           name="gifText"
           aria-label="add GIF text"
           placeholder="Add GIF Text"
@@ -92,7 +92,7 @@ class GenerateGifForm extends Component {
           type="select"
           id="GenerateGifForm-select"
           name="placement"
-          className="GenerateGifForm-select GenerateGifForm-hidden"
+          className="GenerateGifForm-select disabled-feature"
           aria-label="GIF text position"
           onChange={this.handleInputUpdate}
           defaultValue={currentValue}
@@ -111,7 +111,7 @@ class GenerateGifForm extends Component {
           style={colorPickerBg}
           onClick={this.renderColorPicker}
           onKeyDown={this.renderColorPicker}
-          className="ColorPicker GenerateGifForm-hidden"
+          className="ColorPicker disabled-feature"
           aria-label="pick GIF text color"
           role="button"
           aria-pressed={this.state.showColorPicker}

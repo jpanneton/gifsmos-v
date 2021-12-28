@@ -16,3 +16,7 @@ code {
 svg {
   background-color: white;
 }
+
+.disabled-feature {
+  display: none;
+}

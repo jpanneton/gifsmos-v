@@ -33,7 +33,7 @@ export default class InfoIcon extends Component {
         />
         <div className={`InfoIcon-text ${displayClass}`}>
           <p>{this.props.infoText}</p>
-          <a href="https://github.com/desmosinc/gifsmos" target="blank">
+          <a href="https://github.com/jpanneton/gifsmos-v" target="blank">
             More Info
           </a>
         </div>

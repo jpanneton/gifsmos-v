@@ -71,11 +71,6 @@ desired image dimensions which will affect how the elements are scaled within th
 (applies to both the captured snapshots and the final SVG animation),
 as well as the interval between frames in the generated SVG.
 
-If the "Oversample" option is checked, images will be captured at double the
-nominal dimensions and at a higher pixel density, which is nice for high-density
-displays. For instance, an oversampled 300x300 image will actually result in a
-600x600 image that looks good on high-density displays when rendered at 300x300.
-
 ### Generating and downloading a SVG
 
 Inside the preview panel, once you're happy with the results, click the
