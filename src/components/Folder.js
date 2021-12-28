@@ -78,7 +78,10 @@ class Folder extends Component {
                 className="Folder-saved-graph"
                 onClick={() => this.handleLoadGraph(date)}
               >
-                <img src={preview} alt={name + '-preview'} />
+                <div
+                  className="Folder-item-preview"
+                  dangerouslySetInnerHTML={{ __html: preview }}
+                />
                 <div className="Folder-item-text">
                   <div className="Folder-name-text">{name}</div>
                   <div className="Folder-small-text">

@@ -210,14 +210,13 @@ class Preview extends Component {
         </div>
         <div className="Frame-timeline">
           {frameIDs.map((frameID, i) => (
-            <img
+            <div
               className={classNames('Frame-scroll', {
                 'Frame-scroll-active': previewIdx === i
               })}
-              src={frames[frameID]}
               onClick={() => this.handleChangePreviewIdx(i)}
-              alt=""
               key={`frame-id-${frameID}`}
+              dangerouslySetInnerHTML={{ __html: frames[frameID] }}
             />
           ))}
         </div>
@@ -241,7 +240,7 @@ class Preview extends Component {
             className="Preview-progress-inner"
             style={{
               width: `${100 * gifProgress}%`,
-              background: gifProgress === 1 ? '#2ecc40' : '#e79600'
+              background: gifProgress === 1 ? '#2ecc40' : '#1869FF'
             }}
           />
         </div>
@@ -261,10 +260,10 @@ Preview.defaultProps = {
   frameIDs: [],
   gifData: '',
   gifProgress: 0,
-  width: 300,
-  height: 300,
+  width: 800,
+  height: 800,
   oversample: false,
-  interval: 100,
+  interval: 30,
   redoFrames: [],
   updatePreviewIdx: () => {},
   generateGIF: () => {},

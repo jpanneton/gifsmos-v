@@ -11,7 +11,7 @@ describe('<HelpModal/>', () => {
 
   it('renders appropriate content', () => {
     const { getByText } = render(<HelpModal />);
-    expect(getByText('Using GIFsmos').tagName).toBe('H1');
+    expect(getByText('Using GIFsmos V').tagName).toBe('H1');
     expect(getByText('Developer quick-start').tagName).toBe('H3');
   });
 });

@@ -55,7 +55,7 @@
 }
 
 .GenerateGifForm-button:focus {
-  border-color: #e79600;
+  border-color: #1869ff;
   background: #484848;
 }
 
@@ -81,4 +81,8 @@
   font-size: 1em;
   padding: 5px;
   text-align: center;
+}
+
+.GenerateGifForm-hidden {
+  display: none;
 }

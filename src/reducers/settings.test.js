@@ -7,9 +7,9 @@ import {
 
 const initialState = {
   image: {
-    width: 300,
-    height: 300,
-    interval: 100,
+    width: 800,
+    height: 800,
+    interval: 30,
     oversample: false
   },
   bounds: {

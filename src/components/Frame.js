@@ -15,7 +15,10 @@ const Frame = ({
     {imageSrc && (
       <>
         <div className="Frame-container">
-          <img src={imageSrc} alt="current frame" />
+          <div
+            className="Frame-image"
+            dangerouslySetInnerHTML={{ __html: imageSrc }}
+          />
           <p
             className={`Frame-container-text ${textPosition}`}
             style={{ color: fontColor }}

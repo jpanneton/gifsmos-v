@@ -1,0 +1,12 @@
+<svg data-name="Layer 1" version="1.1" viewBox="0 0 845 278" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <style>.cls-1,.cls-2{fill:#fff;}.cls-2{font-family:sans-serif;letter-spacing:0.2em;}</style>
+ </defs>
+ <title>Gifsmos-logo</title>
+ <path class="cls-1" transform="translate(-155 -361)" d="m219 498c0-72 59-131 131-131 40 0 78 18 103 49l-38 26c-3.8-3.6-32-30-71-25-37 5.4-72 38-70 81 1.4 46 46 77 77 77a83 83 0 0 0 39-10c5.1-2.8 11-6 16-12 12-15 9.7-33 8.8-39l-224-132a4.8 4.8 0 0 1 0.82-2.8 4.8 4.8 0 0 1 1.9-1.6q106 38 217 87 25 11 49 22v87l-6 7.3a130 130 0 0 1-103 50c-72 0-131-59-131-131z"/>
+ <path class="cls-1" transform="translate(-155 -361)" d="m492 370h51v254h-51z"/>
+ <path class="cls-1" transform="translate(-155 -361)" d="m576 370h158v51h-106v54h79v51h-79v98h-51z"/>
+ <path class="cls-1" transform="translate(-155 -361)" d="m155 361 35 43c-0.67-0.89-11-15-4.1-27 6.4-12 23-11 24-11z"/>
+ <text class="cls-2" x="490" y="262.24316" style="font-size:50px">SMOS</text>
+ <path class="cls-1" d="m839 9-92 254h-45l-92-254h36l80 223 80-223z"/>
+</svg>

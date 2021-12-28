@@ -119,7 +119,7 @@ class Settings extends Component {
 Settings.defaultProps = {
   expanded: false,
   ...imageSettingDefaults,
-  interval: 100,
+  interval: 30,
   updateSetting: () => {}
 };
 

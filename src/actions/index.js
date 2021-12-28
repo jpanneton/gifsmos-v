@@ -17,7 +17,7 @@
  * place that allows us to write action creators that return a function (called
  * a "thunk") instead of an action. Thunks receive the store's `dispatch`
  * method as an argument and are allowed to have side effects, which gives us
- * the flexibility we need to make async calls to the Desmos and gifshot APIs
+ * the flexibility we need to make async calls to the Desmos and svgasm APIs
  * before updating the store.
  *
  * Because they can access the store, dispatch multiple actions, and produce
@@ -35,6 +35,7 @@ import {
   saveCurrentGraph
 } from '../lib/calc-helpers';
 
+import { createSVG } from '../lib/svgasm';
 import { startTimer, clearTimer } from '../lib/timer';
 
 import {
@@ -282,12 +283,7 @@ export const startAnimation = () => (dispatch, getState) => {
   startTimer(step, interval);
 };
 
-// The gifshot library is loaded in index.html
-const gifshot = window.gifshot;
-export const generateGIF = (images, opts, gifMaker = gifshot) => (
-  dispatch,
-  getState
-) => {
+export const generateGIF = (images, opts) => (dispatch, getState) => {
   // Have to check state interval and not opts because opts is in seconds
   const { interval } = getState().settings.image;
   const { gifFileName } = getState().images;
@@ -297,18 +293,18 @@ export const generateGIF = (images, opts, gifMaker = gifshot) => (
     return;
   }
 
-  const gifshotArgs = {
+  const generationArgs = {
     images,
     ...opts,
     progressCallback: progress => dispatch(updateGIFProgress(progress))
   };
 
-  gifMaker.createGIF(gifshotArgs, data => {
+  createSVG(generationArgs, data => {
     if (data.error) {
       dispatch(flashError(gifCreationProblem()));
     } else {
       dispatch(addGIF(data.image));
-      download(data.image, gifFileName || 'gifsmos.gif', 'image/gif');
+      download(data.image, gifFileName || 'gifsmos.svg', 'image/svg');
     }
   });
 };

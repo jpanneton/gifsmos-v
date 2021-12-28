@@ -8,7 +8,7 @@
   border: 1px solid #fff;
 }
 
-.Frame img {
+.Frame-image {
   max-width: 300px;
   max-height: 300px;
   width: auto;
@@ -32,13 +32,13 @@
 }
 
 .Frame-animation-button:hover {
-  color: #e79600;
-  border-color: #e79600;
+  color: #1869ff;
+  border-color: #1869ff;
 }
 
 .Frame-animation-button:focus {
-  color: #e79600;
-  border-color: #e79600;
+  color: #1869ff;
+  border-color: #1869ff;
 }
 
 .Frame-directional-icon {
@@ -58,6 +58,8 @@
 .Frame-scroll {
   position: relative;
   display: inline-block;
+  min-width: 150px;
+  min-height: 150px;
   width: 150px;
   height: 150px;
   margin: 5px;
@@ -66,7 +68,7 @@
 }
 
 .Frame-scroll-active {
-  outline: 5px solid #e79600;
+  outline: 5px solid #1869ff;
   opacity: 1;
 }
 

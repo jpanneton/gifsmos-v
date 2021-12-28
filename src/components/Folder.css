@@ -67,10 +67,6 @@
   text-align: start;
 }
 
-.Folder-saved-graph > img {
-  border-radius: 5px;
-}
-
 .Folder-previous-items {
   margin-top: 15px;
 }
@@ -81,6 +77,13 @@
 
 .Folder-titles {
   padding-top: 30px;
+}
+
+.Folder-item-preview {
+  border-radius: 5px;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
 }
 
 .Folder-item-text {
@@ -134,7 +137,7 @@
 
 .Folder-button:focus {
   background: #484848;
-  border-color: #e79600;
+  border-color: #1869ff;
 }
 
 .Folder-header {

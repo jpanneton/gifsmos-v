@@ -18,13 +18,14 @@ const initialState = {
     gifData: '',
     gifText: '',
     fontColor: '#000000',
-    gifFileName: ''
+    gifFileName: '',
+    transparentBackground = true
   },
   settings: {
     image: {
-      width: 300,
-      height: 300,
-      interval: 100,
+      width: 800,
+      height: 800,
+      interval: 30,
       oversample: false
     },
     strategy: 'contain'
@@ -301,7 +302,7 @@ describe('Action creators', () => {
         { type: types.ADD_GIF, payload: { imageData: expect.any(String) } }
       ];
 
-      store.dispatch(actions.generateGIF([], opts, global.gifshot));
+      store.dispatch(actions.generateGIF([], opts));
       expect(store.getActions()).toEqual(expectedActions);
     });
 

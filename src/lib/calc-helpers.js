@@ -10,15 +10,37 @@ import { calculator } from './calculator';
 import { noSuchExpression, notASlider } from './error-messages';
 import { saveGraphToLocal, getGraphFromLocal } from './local-storage-helpers';
 
+const { optimize } = require('svgo');
+
 /*
  * The calculator's async screenshot method takes a callback, but we'd prefer to
  * be able to `await` the results inside of async action creators, so wrap it up
  * in a promise.
  */
-export const getImageData = opts =>
+const requestImageData = opts =>
   new Promise((resolve, reject) => {
+    opts.format = 'svg';
     calculator.asyncScreenshot(opts, data => resolve(data));
   });
+
+export const getImageData = async opts => {
+  let svgData = await requestImageData(opts);
+  const parser = new DOMParser();
+  // Use viewBox instead of width / height
+  const xmlDoc = parser.parseFromString(svgData, 'image/svg+xml');
+  const width = xmlDoc.documentElement.getAttribute('width');
+  const height = xmlDoc.documentElement.getAttribute('height');
+  xmlDoc.documentElement.setAttribute('width', '100%');
+  xmlDoc.documentElement.setAttribute('height', '100%');
+  xmlDoc.documentElement.setAttribute('viewBox', `0 0 ${width} ${height}`);
+  // Remove background node
+  const elem = xmlDoc.getElementsByTagName('rect')[0];
+  elem.parentNode.removeChild(elem);
+  // Optimize svg output
+  const serializer = new XMLSerializer();
+  svgData = serializer.serializeToString(xmlDoc);
+  return optimize(svgData, { multipass: true }).data;
+};
 
 /*
  * Note that the array of expressions returned fom the Desmos API is 0-indexed,

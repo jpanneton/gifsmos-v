@@ -6,14 +6,13 @@
   left: 0;
   right: 0;
   height: 60px;
-  background: #e79600;
+  background: #1869ff;
   color: #fff;
 }
 
 .Header-logo {
-  font-weight: bold;
   margin: 12px 5px 0 10px;
-  width: 90px;
+  height: 37px;
 }
 
 .Header-help {

@@ -1,6 +1,6 @@
 export const imageSettingDefaults = {
-  width: 300,
-  height: 300,
+  width: 800,
+  height: 800,
   oversample: false
 };
 

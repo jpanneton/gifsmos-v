@@ -16,7 +16,7 @@ describe('<GenerateGifForm/>', () => {
     expect(container.querySelector('input[name="gifText"]')).toBeTruthy();
     expect(container.querySelector('select[name="placement"]')).toBeTruthy();
     expect(getByText('Pick GIF Text Color')).toBeTruthy();
-    expect(getByText('Download GIF')).toBeTruthy();
+    expect(getByText('Download SVG')).toBeTruthy();
   });
 
   it('has functioning inputs', () => {
@@ -64,7 +64,7 @@ describe('<GenerateGifForm/>', () => {
     const { getByText } = render(
       <GenerateGifForm handleGenerateGIF={onSubmit} />
     );
-    fireEvent.click(getByText('Download GIF'));
+    fireEvent.click(getByText('Download SVG'));
     expect(onSubmit).toHaveBeenCalled();
   });
 });

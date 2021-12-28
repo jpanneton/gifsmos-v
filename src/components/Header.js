@@ -1,12 +1,10 @@
 import React from 'react';
 import './Header.css';
-import logo from './icons/gifsmos-logo.svg';
+import logo from './icons/gifsmos-v-logo.svg';
 
 const Header = () => (
   <div className="Header">
-    <div className="Header-logo">
-      <img src={logo} alt="GIFsmos logo" />
-    </div>
+    <img className="Header-logo" src={logo} alt="GIFsmos logo" />
     <div className="Header-help">
       Paste a Desmos link into the expressions list to import a saved graph.
     </div>
