@@ -299,14 +299,22 @@ export const generateGIF = (images, opts) => (dispatch, getState) => {
     progressCallback: progress => dispatch(updateGIFProgress(progress))
   };
 
-  createSVG(generationArgs, data => {
-    if (data.error) {
-      dispatch(flashError(gifCreationProblem()));
-    } else {
-      dispatch(addGIF(data.image));
-      download(data.image, gifFileName || 'gifsmos.svg', 'image/svg');
-    }
-  });
+  if (images.length === 1) {
+    // Export normal SVG
+    dispatch(updateGIFProgress(1));
+    dispatch(addGIF(images[0]));
+    download(images[0], gifFileName || 'gifsmos.svg', 'image/svg');
+  } else {
+    // Export animated SVG (using svgasm)
+    createSVG(generationArgs, data => {
+      if (data.error) {
+        dispatch(flashError(gifCreationProblem()));
+      } else {
+        dispatch(addGIF(data.image));
+        download(data.image, gifFileName || 'gifsmos.svg', 'image/svg');
+      }
+    });
+  }
 };
 
 export const getBurstSliders = () => dispatch => {
