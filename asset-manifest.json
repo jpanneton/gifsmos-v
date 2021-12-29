@@ -1,7 +1,7 @@
 {
   "main.css": "/gifsmos-v/static/css/main.937eb701.chunk.css",
-  "main.js": "/gifsmos-v/static/js/main.73a9dbab.chunk.js",
-  "main.js.map": "/gifsmos-v/static/js/main.73a9dbab.chunk.js.map",
+  "main.js": "/gifsmos-v/static/js/main.0aedf781.chunk.js",
+  "main.js.map": "/gifsmos-v/static/js/main.0aedf781.chunk.js.map",
   "static/js/1.ee2322a1.chunk.js": "/gifsmos-v/static/js/1.ee2322a1.chunk.js",
   "static/js/1.ee2322a1.chunk.js.map": "/gifsmos-v/static/js/1.ee2322a1.chunk.js.map",
   "runtime~main.js": "/gifsmos-v/static/js/runtime~main.996a44a3.js",
@@ -18,6 +18,6 @@
   "static/media/right.svg": "/gifsmos-v/static/media/right.1e9a60e1.svg",
   "static/css/main.937eb701.chunk.css.map": "/gifsmos-v/static/css/main.937eb701.chunk.css.map",
   "index.html": "/gifsmos-v/index.html",
-  "precache-manifest.46ea3c569b64b2dc9997ab23945662b6.js": "/gifsmos-v/precache-manifest.46ea3c569b64b2dc9997ab23945662b6.js",
+  "precache-manifest.352e12326ff6d42752f2f5b5a5f4598d.js": "/gifsmos-v/precache-manifest.352e12326ff6d42752f2f5b5a5f4598d.js",
   "service-worker.js": "/gifsmos-v/service-worker.js"
 }
