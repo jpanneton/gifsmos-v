@@ -1,12 +1,12 @@
 {
   "main.css": "/gifsmos-v/static/css/main.937eb701.chunk.css",
-  "main.js": "/gifsmos-v/static/js/main.e6eb2518.chunk.js",
-  "main.js.map": "/gifsmos-v/static/js/main.e6eb2518.chunk.js.map",
-  "static/js/1.80ca1bf7.chunk.js": "/gifsmos-v/static/js/1.80ca1bf7.chunk.js",
-  "static/js/1.80ca1bf7.chunk.js.map": "/gifsmos-v/static/js/1.80ca1bf7.chunk.js.map",
+  "main.js": "/gifsmos-v/static/js/main.73a9dbab.chunk.js",
+  "main.js.map": "/gifsmos-v/static/js/main.73a9dbab.chunk.js.map",
+  "static/js/1.ee2322a1.chunk.js": "/gifsmos-v/static/js/1.ee2322a1.chunk.js",
+  "static/js/1.ee2322a1.chunk.js.map": "/gifsmos-v/static/js/1.ee2322a1.chunk.js.map",
   "runtime~main.js": "/gifsmos-v/static/js/runtime~main.996a44a3.js",
   "runtime~main.js.map": "/gifsmos-v/static/js/runtime~main.996a44a3.js.map",
-  "static/media/gifsmos-v-logo.svg": "/gifsmos-v/static/media/gifsmos-v-logo.fc4a46fd.svg",
+  "static/media/gifsmos-v-logo.svg": "/gifsmos-v/static/media/gifsmos-v-logo.cdb3d5e6.svg",
   "static/media/camera.svg": "/gifsmos-v/static/media/camera.2edf57b6.svg",
   "static/media/preview.svg": "/gifsmos-v/static/media/preview.26150562.svg",
   "static/media/reset.svg": "/gifsmos-v/static/media/reset.ebf3b7c6.svg",
@@ -18,6 +18,6 @@
   "static/media/right.svg": "/gifsmos-v/static/media/right.1e9a60e1.svg",
   "static/css/main.937eb701.chunk.css.map": "/gifsmos-v/static/css/main.937eb701.chunk.css.map",
   "index.html": "/gifsmos-v/index.html",
-  "precache-manifest.1e65ad684fb4ba89b987e3aa1555b56d.js": "/gifsmos-v/precache-manifest.1e65ad684fb4ba89b987e3aa1555b56d.js",
+  "precache-manifest.46ea3c569b64b2dc9997ab23945662b6.js": "/gifsmos-v/precache-manifest.46ea3c569b64b2dc9997ab23945662b6.js",
   "service-worker.js": "/gifsmos-v/service-worker.js"
 }
