@@ -36,6 +36,7 @@ import {
 } from '../lib/calc-helpers';
 
 import { createSVG } from '../lib/svgasm';
+import { createMOV, createPNG } from '../lib/movasm';
 import { startTimer, clearTimer } from '../lib/timer';
 
 import {
@@ -283,7 +284,7 @@ export const startAnimation = () => (dispatch, getState) => {
   startTimer(step, interval);
 };
 
-export const generateGIF = (images, opts) => (dispatch, getState) => {
+export const generateGIF = (images, opts) => async (dispatch, getState) => {
   // Have to check state interval and not opts because opts is in seconds
   const { interval } = getState().settings.image;
   const { gifFileName } = getState().images;
@@ -299,21 +300,45 @@ export const generateGIF = (images, opts) => (dispatch, getState) => {
     progressCallback: progress => dispatch(updateGIFProgress(progress))
   };
 
-  if (images.length === 1) {
-    // Export normal SVG
-    dispatch(updateGIFProgress(1));
-    dispatch(addGIF(images[0]));
-    download(images[0], gifFileName || 'gifsmos.svg', 'image/svg');
-  } else {
-    // Export animated SVG (using svgasm)
-    createSVG(generationArgs, data => {
-      if (data.error) {
-        dispatch(flashError(gifCreationProblem()));
-      } else {
-        dispatch(addGIF(data.image));
-        download(data.image, gifFileName || 'gifsmos.svg', 'image/svg');
-      }
-    });
+  if (opts.animationFormat === 'SVG') {
+    if (images.length === 1) {
+      // Export normal SVG
+      dispatch(updateGIFProgress(1));
+      dispatch(addGIF(images[0]));
+      download(images[0], gifFileName || 'gifsmos.svg', 'image/svg');
+    } else {
+      // Export animated SVG (using svgasm)
+      await createSVG(generationArgs, data => {
+        if (data.error) {
+          dispatch(flashError(gifCreationProblem()));
+        } else {
+          dispatch(addGIF(data.image));
+          download(data.image, gifFileName || 'gifsmos.svg', 'image/svg');
+        }
+      });
+    }
+  } else if (opts.animationFormat === 'MOV') {
+    if (images.length === 1) {
+      // Export PNG (with alpha)
+      await createPNG(generationArgs, data => {
+        if (data.error) {
+          dispatch(flashError(gifCreationProblem()));
+        } else {
+          //dispatch(addGIF(data.image));
+          download(data.image, gifFileName || 'gifsmos.png', 'image/png');
+        }
+      });
+    } else {
+      // Export MOV (with alpha)
+      await createMOV(generationArgs, data => {
+        if (data.error) {
+          dispatch(flashError(gifCreationProblem()));
+        } else {
+          //dispatch(addGIF(data.image));
+          download(data.image, gifFileName || 'gifsmos.mov', 'video/quicktime');
+        }
+      });
+    }
   }
 };
 

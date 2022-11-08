@@ -17,6 +17,7 @@ describe('<GenerateGifForm/>', () => {
     expect(container.querySelector('select[name="placement"]')).toBeTruthy();
     expect(getByText('Pick GIF Text Color')).toBeTruthy();
     expect(getByText('Download SVG')).toBeTruthy();
+    expect(getByText('Download MOV')).toBeTruthy();
   });
 
   it('has functioning inputs', () => {

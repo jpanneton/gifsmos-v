@@ -3,7 +3,7 @@
  * Copyright (C) 2021 Tom Kwok https://tomkwok.com/
  * Copyright (C) 2021 Jérémi Panneton https://jpanneton.dev/
  */
-export const createSVG = (args, cb) => {
+export const createSVG = async (args, cb) => {
   const images = args.images;
   const animationTiming = 'linear';
 
@@ -16,11 +16,11 @@ export const createSVG = (args, cb) => {
     // Find the first occurrence of '<svg'
     const svgTagStart = svgData.indexOf('<svg');
     // Find the first occurrence of '>' after '<svg'
-    const svgTagStartEnd = svgData.indexOf('>', svgTagStart);
+    const svgTagStartEnd = svgData.indexOf('>', svgTagStart) + 1;
 
     if (i === 0) {
       // Output opening '<svg>' tag if this file is first in the list
-      const svgTag = svgData.substr(0, svgTagStartEnd);
+      const svgTag = svgData.substr(0, svgTagStartEnd - 1);
       output += svgTag;
 
       // Add 'xmlns' attribute if missing (autotrace output) to make SVG valid
@@ -28,6 +28,7 @@ export const createSVG = (args, cb) => {
         output += ' xmlns="http://www.w3.org/2000/svg"';
       }
 
+      // Close '<svg>' tag
       output += '>';
 
       // All elements are set to hidden before any element for a frame loads

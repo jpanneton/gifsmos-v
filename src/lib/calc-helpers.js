@@ -9,8 +9,7 @@
 import { calculator } from './calculator';
 import { noSuchExpression, notASlider } from './error-messages';
 import { saveGraphToLocal, getGraphFromLocal } from './local-storage-helpers';
-
-const { optimize } = require('svgo');
+import { optimize } from 'svgo/dist/svgo.browser.js';
 
 /*
  * The calculator's async screenshot method takes a callback, but we'd prefer to

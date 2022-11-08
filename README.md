@@ -75,7 +75,17 @@ as well as the interval between frames in the generated SVG.
 
 Inside the preview panel, once you're happy with the results, click the
 "Download SVG" button to generate your final image and save it to your
-browser's default download location (named `gifsmos.svg`).
+browser's default download location (named `gifsmos.svg`). Note that
+a single frame will be exported in standard SVG (no animation).
+
+### Generating and downloading a MOV
+
+You can also click on "Download MOV" to download a rasterized version of the SVG
+animation in transparent video format. The generated file is in MOV format (QuickTime)
+and is encoded using the PNG codec. This feature is useful if you want to embed
+the animation in a video (e.g. for YouTube) using a video editing software.
+Unlike the original GIFsmos, background transparency is preserved. Note that
+a single frame will be exported in PNG (image format).
 
 ## Developer quick-start
 

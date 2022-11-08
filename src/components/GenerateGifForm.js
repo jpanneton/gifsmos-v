@@ -20,9 +20,13 @@ class GenerateGifForm extends Component {
     }
   }
 
-  handleSubmit(evt) {
+  async handleSubmit(evt) {
     evt.preventDefault();
-    this.props.handleGenerateGIF();
+    if (evt.nativeEvent.submitter.name === "generateSvgButton") {
+      await this.props.handleGenerateGIF('SVG');
+    } else if (evt.nativeEvent.submitter.name === "generateMovButton") {
+      await this.props.handleGenerateGIF('MOV');
+    }
   }
 
   handleInputUpdate(evt) {
@@ -123,9 +127,18 @@ class GenerateGifForm extends Component {
         <button
           className="GenerateGifForm-button"
           aria-label="generate gif"
+          name="generateSvgButton"
           type="submit"
         >
           Download SVG
+        </button>
+        <button
+          className="GenerateGifForm-button"
+          aria-label="generate mov"
+          name="generateMovButton"
+          type="submit"
+        >
+          Download MOV
         </button>
       </form>
     );

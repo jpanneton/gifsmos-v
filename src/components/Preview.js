@@ -33,7 +33,7 @@ class Preview extends Component {
     updatePreviewIdx(idx);
   }
 
-  handleGenerateGIF() {
+  async handleGenerateGIF(animationFormat) {
     const {
       frames,
       frameIDs,
@@ -51,6 +51,7 @@ class Preview extends Component {
     const images = frameIDs.map(id => frames[id]);
     const multiplier = oversample ? 2 : 1;
     const opts = {
+      animationFormat: animationFormat,
       gifWidth: width * multiplier,
       gifHeight: height * multiplier,
       interval: interval / 1000,
@@ -59,7 +60,7 @@ class Preview extends Component {
       textAlign: textAlign,
       textBaseline: textBaseline
     };
-    generateGIF(images, opts);
+    await generateGIF(images, opts);
   }
 
   updateColorPicker(status) {
@@ -266,7 +267,7 @@ Preview.defaultProps = {
   interval: 30,
   redoFrames: [],
   updatePreviewIdx: () => {},
-  generateGIF: () => {},
+  generateGIF: async () => {},
   startAnimation: () => {},
   stopAnimation: () => {}
 };

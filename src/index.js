@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client'
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
@@ -14,11 +14,10 @@ const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 const closePane = () => store.dispatch(togglePane(panes.NONE));
 
-ReactDOM.render(
+createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <AppContainer onEscape={closePane} />
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 );
 
 // Say hello to the nice people with their consoles open.
