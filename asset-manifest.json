@@ -1,23 +1,23 @@
 {
-  "main.css": "/gifsmos-v/static/css/main.937eb701.chunk.css",
-  "main.js": "/gifsmos-v/static/js/main.0aedf781.chunk.js",
-  "main.js.map": "/gifsmos-v/static/js/main.0aedf781.chunk.js.map",
-  "static/js/1.ee2322a1.chunk.js": "/gifsmos-v/static/js/1.ee2322a1.chunk.js",
-  "static/js/1.ee2322a1.chunk.js.map": "/gifsmos-v/static/js/1.ee2322a1.chunk.js.map",
-  "runtime~main.js": "/gifsmos-v/static/js/runtime~main.996a44a3.js",
-  "runtime~main.js.map": "/gifsmos-v/static/js/runtime~main.996a44a3.js.map",
-  "static/media/gifsmos-v-logo.svg": "/gifsmos-v/static/media/gifsmos-v-logo.cdb3d5e6.svg",
-  "static/media/camera.svg": "/gifsmos-v/static/media/camera.2edf57b6.svg",
-  "static/media/preview.svg": "/gifsmos-v/static/media/preview.26150562.svg",
-  "static/media/reset.svg": "/gifsmos-v/static/media/reset.ebf3b7c6.svg",
-  "static/media/burst.svg": "/gifsmos-v/static/media/burst.6d8f2435.svg",
-  "static/media/saved.svg": "/gifsmos-v/static/media/saved.50e57a4a.svg",
-  "static/media/settings.svg": "/gifsmos-v/static/media/settings.32c23130.svg",
-  "static/media/info.svg": "/gifsmos-v/static/media/info.3941b4c9.svg",
-  "static/media/left.svg": "/gifsmos-v/static/media/left.f35a3e98.svg",
-  "static/media/right.svg": "/gifsmos-v/static/media/right.1e9a60e1.svg",
-  "static/css/main.937eb701.chunk.css.map": "/gifsmos-v/static/css/main.937eb701.chunk.css.map",
-  "index.html": "/gifsmos-v/index.html",
-  "precache-manifest.352e12326ff6d42752f2f5b5a5f4598d.js": "/gifsmos-v/precache-manifest.352e12326ff6d42752f2f5b5a5f4598d.js",
-  "service-worker.js": "/gifsmos-v/service-worker.js"
+  "files": {
+    "main.css": "/gifsmos-v/static/css/main.108c95ef.css",
+    "main.js": "/gifsmos-v/static/js/main.cd168f40.js",
+    "static/media/settings.svg": "/gifsmos-v/static/media/settings.607f75b7e22b4827dffbc1faf4f2924f.svg",
+    "static/media/reset.svg": "/gifsmos-v/static/media/reset.e339583cfd3bdabb431b0a27b09c7a1c.svg",
+    "static/media/preview.svg": "/gifsmos-v/static/media/preview.a997367d7671db2b278b1bee3de33780.svg",
+    "static/media/burst.svg": "/gifsmos-v/static/media/burst.5a1153a041ef1622ce2005bc8f343682.svg",
+    "static/media/camera.svg": "/gifsmos-v/static/media/camera.f3d512e883cb09a481f5b0c3a516561e.svg",
+    "static/media/info.svg": "/gifsmos-v/static/media/info.42efa9d5da653cd4b93fdd9a342c9276.svg",
+    "static/media/gifsmos-v-logo.svg": "/gifsmos-v/static/media/gifsmos-v-logo.65c08e915324393cd55bb650a37fd200.svg",
+    "static/media/right.svg": "/gifsmos-v/static/media/right.e44508c6277f15c1feecbb8ec7d419da.svg",
+    "static/media/left.svg": "/gifsmos-v/static/media/left.8cd18e8bbdb3be521bb73620e76b63e0.svg",
+    "index.html": "/gifsmos-v/index.html",
+    "static/media/saved.svg": "/gifsmos-v/static/media/saved.c4212f0bf503ed720df99587c273e74a.svg",
+    "main.108c95ef.css.map": "/gifsmos-v/static/css/main.108c95ef.css.map",
+    "main.cd168f40.js.map": "/gifsmos-v/static/js/main.cd168f40.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.108c95ef.css",
+    "static/js/main.cd168f40.js"
+  ]
 }
