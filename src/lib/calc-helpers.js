@@ -24,7 +24,7 @@ const requestImageData = opts =>
 
 export const getImageData = async opts => {
   let svgData = await requestImageData(opts);
-  if (svgData != '') {
+  if (svgData !== '') {
     const parser = new DOMParser();
     // Use viewBox instead of width / height
     const xmlDoc = parser.parseFromString(svgData, 'image/svg+xml');

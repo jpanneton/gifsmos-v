@@ -2,7 +2,7 @@
   <img src="./src/components/icons/gifsmos-v-logo-blue.svg" height="120" alt="GIFsmos V logo"/>
 </div>
 
-# GIFsmos V [![last commit to master](https://img.shields.io/github/last-commit/jpanneton/gifsmos-v/main.svg?style=flat-square)](https://github.com/jpanneton/gifsmos-v/commits/main) [![license](https://img.shields.io/github/license/jpanneton/gifsmos-v.svg?style=flat-square)](https://github.com/jpanneton/gifsmos-v/blob/main/LICENSE.md)
+# GIFsmos V [![last commit to master](https://img.shields.io/github/last-commit/jpanneton/gifsmos-v/main.svg?style=flat-square)](https://github.com/jpanneton/gifsmos-v/commits/main) [![actions status](https://github.com/jpanneton/gifsmos-v/workflows/CI/badge.svg)](https://github.com/jpanneton/gifsmos-v/actions) [![license](https://img.shields.io/github/license/jpanneton/gifsmos-v.svg?style=flat-square)](https://github.com/jpanneton/gifsmos-v/blob/main/LICENSE.md)
 
 GIFsmos V is a web app for creating vector animations from
 [Desmos](https://www.desmos.com/calculator) graphs.
