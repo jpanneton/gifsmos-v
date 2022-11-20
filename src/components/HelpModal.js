@@ -94,7 +94,8 @@ export default class HelpModal extends Component {
               animation in a video (e.g. for YouTube) using a video editing
               software. Unlike the original GIFsmos, background transparency
               is preserved. Note that a single frame will be exported in PNG
-              (image format).
+              (image format). Also, processing time may be quite long (using
+              ffmpeg.wasm in single-threaded mode for browser compatibility).
             </p>
           </div>
         </div>

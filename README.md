@@ -7,9 +7,38 @@
 GIFsmos V is a web app for creating vector animations from
 [Desmos](https://www.desmos.com/calculator) graphs.
 
+https://jpanneton.dev/gifsmos-v
+
+## Demo
+
+<table width="100%">
+  <tr>
+    <th style="text-align:center"><a href="https://www.reddit.com/r/desmos/comments/kyfnxx/desmos_most_satisfying_loading_gif_ever/">Loading</a> (989 KB)</th>
+    <th style="text-align:center"><a href="https://www.reddit.com/r/desmos/comments/y3w1dj/colour_changing_tesseract/">Tesseract</a> (6.04 MB)</th>
+    <th style="text-align:center"><a href="https://jpanneton.dev/posts/the-perfect-frequency-splitter-debunked">Phase</a> (679 KB)</th>
+  </tr>
+  <tr>
+    <td width="33%">
+      <img src="public/example1.svg" width="100%">
+    </td>
+    <td width="33%">
+      <img src="public/example2.svg" width="100%">
+    </td>
+      <td width="33%">
+      <img src="public/example3.svg" width="100%">
+    </td>
+  </tr>
+</table>
+
+Note: each animation above is 2.4s long and has 80 frames (~33 FPS).
+
 ## How it works
 
-As opposed to [GIFsmos](https://github.com/desmosinc/gifsmos), GIFsmos V is using the SVG screenshot format from the Desmos API to capture frames. Then, instead of using [gifshot](https://yahoo.github.io/gifshot) to assemble a GIF from the captured PNG frames, each SVG gets pre-processed and assembled using a JavaScript version of [svgasm](https://github.com/tomkwok/svgasm). Here are the detailed steps:
+As opposed to [GIFsmos](https://github.com/desmosinc/gifsmos), GIFsmos V is using the
+SVG screenshot format from the Desmos API to capture frames. Then, instead of using
+[gifshot](https://yahoo.github.io/gifshot) to assemble a GIF from the captured PNG frames,
+each SVG gets pre-processed and assembled using a JavaScript version of
+[svgasm](https://github.com/tomkwok/svgasm). Here are the detailed steps:
 
 1. Capture SVG screenshots of the graph using the Desmos API
 1. Remove the first `<rect>` element from each SVG (background node)
@@ -32,6 +61,10 @@ Conversely, if you build something great in GIFsmos V that you want to save to
 your Desmos account, click "edit graph on Desmos" (at the bottom of the
 expressions list or the graph paper), and it will open a copy of your graph on
 desmos.com.
+
+Note that you can disable the grid as well as the axes in Desmos' settings.
+This can be useful before capturing to streamline the generated animation
+and get a pure transparent background (without any grid or axes).
 
 To learn more about using the graphing calculator to build cool stuff, check out
 the [Learn Desmos](https://learn.desmos.com/graphing) resources.
@@ -85,7 +118,9 @@ animation in transparent video format. The generated file is in MOV format (Quic
 and is encoded using the PNG codec. This feature is useful if you want to embed
 the animation in a video (e.g. for YouTube) using a video editing software.
 Unlike the original GIFsmos, background transparency is preserved. Note that
-a single frame will be exported in PNG (image format).
+a single frame will be exported in PNG (image format). Also, processing time
+may be quite long (using [ffmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm)
+in single-threaded mode for browser compatibility).
 
 ## Developer quick-start
 
