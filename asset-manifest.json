@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/gifsmos-v/static/css/main.108c95ef.css",
-    "main.js": "/gifsmos-v/static/js/main.cd168f40.js",
+    "main.css": "/gifsmos-v/static/css/main.27b3ae5d.css",
+    "main.js": "/gifsmos-v/static/js/main.5a016085.js",
     "static/media/settings.svg": "/gifsmos-v/static/media/settings.607f75b7e22b4827dffbc1faf4f2924f.svg",
     "static/media/reset.svg": "/gifsmos-v/static/media/reset.e339583cfd3bdabb431b0a27b09c7a1c.svg",
     "static/media/preview.svg": "/gifsmos-v/static/media/preview.a997367d7671db2b278b1bee3de33780.svg",
@@ -13,11 +13,11 @@
     "static/media/left.svg": "/gifsmos-v/static/media/left.8cd18e8bbdb3be521bb73620e76b63e0.svg",
     "index.html": "/gifsmos-v/index.html",
     "static/media/saved.svg": "/gifsmos-v/static/media/saved.c4212f0bf503ed720df99587c273e74a.svg",
-    "main.108c95ef.css.map": "/gifsmos-v/static/css/main.108c95ef.css.map",
-    "main.cd168f40.js.map": "/gifsmos-v/static/js/main.cd168f40.js.map"
+    "main.27b3ae5d.css.map": "/gifsmos-v/static/css/main.27b3ae5d.css.map",
+    "main.5a016085.js.map": "/gifsmos-v/static/js/main.5a016085.js.map"
   },
   "entrypoints": [
-    "static/css/main.108c95ef.css",
-    "static/js/main.cd168f40.js"
+    "static/css/main.27b3ae5d.css",
+    "static/js/main.5a016085.js"
   ]
 }
