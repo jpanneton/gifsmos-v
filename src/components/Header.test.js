@@ -11,10 +11,10 @@ describe('<Header/>', () => {
 
   it('renders appropriate content', () => {
     const { container } = render(<Header />);
-    expect(container.querySelector('.Header-logo').firstChild.tagName).toBe(
+    expect(container.querySelector('.Header-logo').tagName).toBe(
       'IMG'
     );
-    expect(container.querySelector('.Header-logo').firstChild.alt).toBe(
+    expect(container.querySelector('.Header-logo').alt).toBe(
       'GIFsmos logo'
     );
     expect(container.querySelector('.Header-help').textContent).toMatch(

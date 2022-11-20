@@ -7,6 +7,18 @@
       "name": "Debug Gifsmos V (Chrome)",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}"
+    },
+    {
+      "command": "npm start",
+      "request": "launch",
+      "name": "Run Gifsmos V Server",
+      "type": "node-terminal"
+    },
+    {
+      "command": "npm test",
+      "request": "launch",
+      "name": "Run Gifsmos V Unit Tests",
+      "type": "node-terminal"
     }
   ]
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import ColorPicker from './ColorPicker';
-import { render, fireEvent, wait, cleanup } from '@testing-library/react';
+import { cleanup, fireEvent, render } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -23,7 +23,6 @@ describe('<ColorPicker/>', () => {
       <ColorPicker updateTextColor={updateTextColor} />
     );
     fireEvent.click(container.querySelector('div[title="#7ED321"]'));
-    await wait();
     expect(updateTextColor).toHaveBeenCalled();
   });
 });

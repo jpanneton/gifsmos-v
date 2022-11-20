@@ -5,7 +5,7 @@ import './ErrorToast.css';
 const ErrorToast = ({ message }) => {
   if (!message.length) return null;
   return (
-    <div className="ErrorToast" role="alert" aria-errormessage={message}>
+    <div className="ErrorToast" role="alert">
       {message}
     </div>
   );

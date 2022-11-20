@@ -1,7 +1,7 @@
 import React from 'react';
 import Burst from './Burst';
 import * as calcHelpers from '../lib/calc-helpers';
-import { render, cleanup, fireEvent, wait } from '@testing-library/react';
+import { cleanup, fireEvent, render } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -43,7 +43,6 @@ describe('<Burst/>', () => {
       <Burst expanded requestBurst={requestBurst} />
     );
     fireEvent.click(getByText('Capture'));
-    await wait();
     expect(requestBurst).toHaveBeenCalled();
   });
 });

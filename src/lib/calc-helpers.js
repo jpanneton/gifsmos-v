@@ -24,21 +24,24 @@ const requestImageData = opts =>
 
 export const getImageData = async opts => {
   let svgData = await requestImageData(opts);
-  const parser = new DOMParser();
-  // Use viewBox instead of width / height
-  const xmlDoc = parser.parseFromString(svgData, 'image/svg+xml');
-  const width = xmlDoc.documentElement.getAttribute('width');
-  const height = xmlDoc.documentElement.getAttribute('height');
-  xmlDoc.documentElement.setAttribute('width', '100%');
-  xmlDoc.documentElement.setAttribute('height', '100%');
-  xmlDoc.documentElement.setAttribute('viewBox', `0 0 ${width} ${height}`);
-  // Remove background node
-  const elem = xmlDoc.getElementsByTagName('rect')[0];
-  elem.parentNode.removeChild(elem);
-  // Optimize svg output
-  const serializer = new XMLSerializer();
-  svgData = serializer.serializeToString(xmlDoc);
-  return optimize(svgData, { multipass: true }).data;
+  if (svgData != '') {
+    const parser = new DOMParser();
+    // Use viewBox instead of width / height
+    const xmlDoc = parser.parseFromString(svgData, 'image/svg+xml');
+    const width = xmlDoc.documentElement.getAttribute('width');
+    const height = xmlDoc.documentElement.getAttribute('height');
+    xmlDoc.documentElement.setAttribute('width', '100%');
+    xmlDoc.documentElement.setAttribute('height', '100%');
+    xmlDoc.documentElement.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    // Remove background node
+    const elem = xmlDoc.getElementsByTagName('rect')[0];
+    elem.parentNode.removeChild(elem);
+    // Optimize svg output
+    const serializer = new XMLSerializer();
+    svgData = serializer.serializeToString(xmlDoc);
+    return optimize(svgData, { multipass: true }).data;
+  }
+  return svgData;
 };
 
 /*

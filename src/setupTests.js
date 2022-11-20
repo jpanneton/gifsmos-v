@@ -1,4 +1,4 @@
-import 'jest-dom/extend-expect';
+import '@testing-library/jest-dom/extend-expect';
 import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -18,7 +18,8 @@ global.Desmos = {
         { id: 1, type: 'expression', latex: 'x = 3' },
         { id: 2, latex: '' }
       ],
-      setExpression: () => null
+      setExpression: () => null,
+      observeEvent: () => null
     };
   })
 };

@@ -34,6 +34,12 @@
       "pre-commit": "pretty-quick --staged"
     }
   },
+  "jest": {
+    "resetMocks": false,
+    "transformIgnorePatterns": [
+      "node_modules/node_modules/(?!svgo)/"
+    ]
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
