@@ -3,7 +3,6 @@ import {
   ADD_FRAME,
   UPDATE_GIF_PROGRESS,
   UPDATE_GIF_FILENAME,
-  ADD_GIF,
   UNDO_BURST,
   UPDATE_IMAGE_SETTING,
   UPDATE_BOUNDS_SETTING,
@@ -19,7 +18,6 @@ const initialState = {
   frameIDs: [],
   redoFrames: [],
   gifProgress: 0,
-  gifData: '',
   gifText: '',
   fontColor: '#000000',
   gifFileName: '',
@@ -64,15 +62,6 @@ describe('reducers', () => {
       expect(newState.gifFileName).toEqual(gifFileName);
     });
 
-    it('handles ADD_GIF', () => {
-      const gifData = 'URI';
-      const newState = reducer(initialState, {
-        type: ADD_GIF,
-        payload: { imageData: gifData }
-      });
-      expect(newState.gifData).toEqual(gifData);
-    });
-
     it('handles UNDO_BURST', () => {
       const frames = { 0: 'zero' };
       const frameIDs = [0];
@@ -85,13 +74,8 @@ describe('reducers', () => {
     });
 
     it('handles image setting actions', () => {
-      const gifData = 'URI';
       const gifProgress = 1;
-      const gifState = reducer(initialState, {
-        type: ADD_GIF,
-        payload: { imageData: gifData }
-      });
-      const progressState = reducer(gifState, {
+      const progressState = reducer(initialState, {
         type: UPDATE_GIF_PROGRESS,
         payload: { progress: gifProgress }
       });
@@ -99,7 +83,6 @@ describe('reducers', () => {
         type: UPDATE_IMAGE_SETTING,
         payload: { width: 200 }
       });
-      expect(finalState.gifData).toEqual('');
       expect(finalState.gifProgress).toEqual(0);
     });
 
@@ -134,13 +117,8 @@ describe('reducers', () => {
     });
 
     it('handles RESET', () => {
-      const gifData = 'URI';
       const gifProgress = 1;
-      const gifState = reducer(initialState, {
-        type: ADD_GIF,
-        payload: { imageData: gifData }
-      });
-      const progressState = reducer(gifState, {
+      const progressState = reducer(initialState, {
         type: UPDATE_GIF_PROGRESS,
         payload: { progress: gifProgress }
       });

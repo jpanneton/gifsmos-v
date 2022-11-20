@@ -13,6 +13,9 @@ export const createMOV = async (args, cb) => {
   const ffmpeg = createFFmpeg({
     mainName: 'main',
     corePath: 'https://unpkg.com/@ffmpeg/core-st@0.11.1/dist/ffmpeg-core.js',
+    progress: p => {
+      args.progressCallback(0.99 + 0.01 * p.ratio);
+    }
   });
 
   await ffmpeg.load();
@@ -50,7 +53,7 @@ export const createMOV = async (args, cb) => {
     const pngBlobData = await pngBlob.arrayBuffer();
     ffmpeg.FS('writeFile', `frame${("000000" + i).slice(-7)}.png`, new Uint8Array(pngBlobData));
 
-    args.progressCallback(i / images.length);
+    args.progressCallback(0.99 * i / images.length);
   }
 
   // Run FFmpeg (same as CLI)
@@ -97,6 +100,5 @@ export const createPNG = async (args, cb) => {
   const pngBlob = await canvas.convertToBlob();
   const pngBlobData = await pngBlob.arrayBuffer();
 
-  args.progressCallback(1);
   return cb({ image: pngBlobData });
 };

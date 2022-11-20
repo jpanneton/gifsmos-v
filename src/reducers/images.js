@@ -5,7 +5,6 @@
  * frames: a map from frame ids to data URIs
  * frameIDs: an array of images representing the final image order
  * gifProgress: a value in [0, 1] representing processing progress
- * gifData: the data URI of the generated GIF
  */
 
 import {
@@ -13,7 +12,6 @@ import {
   UPDATE_GIF_PROGRESS,
   DELETE_FRAME_IDX,
   REDO_FRAME,
-  ADD_GIF,
   UNDO_BURST,
   UPDATE_GIF_FILENAME,
   UPDATE_IMAGE_SETTING,
@@ -30,7 +28,6 @@ const initialState = {
   frameIDs: [],
   redoFrames: [],
   gifProgress: 0,
-  gifData: '',
   gifText: '',
   textAlign: 'center',
   textBaseline: 'bottom',
@@ -49,7 +46,6 @@ const images = (state = initialState, { type, payload }) => {
           frames: { ...frames, [id]: imageData },
           frameIDs: [...frameIDs, id],
           gifProgress: 0,
-          gifData: '',
           redoFrames: []
         }
       };
@@ -77,7 +73,6 @@ const images = (state = initialState, { type, payload }) => {
           frames: newFrames,
           framesIDs: newFrameIDs,
           gifProgress: 0,
-          gifData: '',
           redoFrames: [...state.redoFrames, deletedFrame]
         }
       };
@@ -121,12 +116,6 @@ const images = (state = initialState, { type, payload }) => {
         gifFileName: payload.gifFileName
       };
 
-    case ADD_GIF:
-      return {
-        ...state,
-        gifData: payload.imageData
-      };
-
     case UNDO_BURST:
       return {
         ...state,
@@ -141,7 +130,6 @@ const images = (state = initialState, { type, payload }) => {
         ...state,
         ...{
           gifProgress: 0,
-          gifData: ''
         }
       };
 

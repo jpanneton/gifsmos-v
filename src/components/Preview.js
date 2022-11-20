@@ -228,7 +228,7 @@ class Preview extends Component {
           </div>
         ) : null}
         <div className="Preview-create">
-          {!!numFrames && this.props.gifData.length === 0 ? (
+          {!!numFrames ? (
             <GenerateGifFormContainer
               handleGenerateGIF={this.handleGenerateGIF}
               showColorPicker={this.state.showColorPicker}
@@ -236,17 +236,20 @@ class Preview extends Component {
             />
           ) : null}
         </div>
-        <div className="Preview-progress-outer">
-          <div
-            className="Preview-progress-inner"
-            style={{
-              width: `${100 * gifProgress}%`,
-              background: gifProgress === 1 ? '#2ecc40' : '#1869FF'
-            }}
-          />
-        </div>
+        {gifProgress > 0 ? (
+          <div className="Preview-progress-outer">
+            <div
+              className="Preview-progress-inner"
+              style={{
+                width: `${100 * gifProgress}%`,
+                background: gifProgress === 1 ? '#2ecc40' : '#1869FF'
+              }}
+            />
+            <p>{Math.round(100 * gifProgress)}%</p>
+          </div>
+        ) : null}
         {gifProgress === 1 ? (
-          <div className="Preview-progress-success">Download Successful </div>
+          <div className="Preview-progress-success">Download Successful</div>
         ) : null}
       </div>
     );
@@ -259,7 +262,6 @@ Preview.defaultProps = {
   playing: false,
   frames: {},
   frameIDs: [],
-  gifData: '',
   gifProgress: 0,
   width: 800,
   height: 800,
@@ -278,7 +280,6 @@ Preview.propTypes = {
   playing: PropTypes.bool.isRequired,
   frames: PropTypes.object.isRequired,
   frameIDs: PropTypes.array.isRequired,
-  gifData: PropTypes.string.isRequired,
   gifProgress: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,

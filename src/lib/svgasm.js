@@ -93,6 +93,5 @@ export const createSVG = async (args, cb) => {
   output += '</style></defs>';
   output += closingTag;
 
-  args.progressCallback(1);
   return cb({ image: output });
 };

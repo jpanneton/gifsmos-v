@@ -16,7 +16,11 @@ describe('<Preview/>', () => {
 
   it('renders appropriate content', () => {
     const { container } = global.renderWithRedux(
-      <Preview expanded frameIDs={[1]} />
+      <Preview
+        expanded
+        frameIDs={[1]}
+        gifProgress={0.5}
+      />
     );
     expect(container.querySelector('.Frame')).toBeTruthy();
     expect(container.querySelector('.Preview-scrubber')).toBeTruthy();

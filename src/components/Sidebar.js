@@ -79,7 +79,7 @@ class Sidebar extends Component {
           onClick={this.handleTogglePreview}
           color="orange"
           showBadge={!!numFrames}
-          value={numFrames > 99 ? '99+' : numFrames}
+          value={numFrames > 99 ? '99+' : numFrames.toString()}
         />
 
         <SidebarButton
@@ -114,7 +114,6 @@ Sidebar.propTypes = {
   ...imageSettingPropTypes,
   numFrames: PropTypes.number.isRequired,
   expandedPane: PropTypes.string.isRequired,
-  gifData: PropTypes.string.isRequired,
   requestFrame: PropTypes.func.isRequired,
   togglePane: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired
@@ -123,7 +122,6 @@ Sidebar.propTypes = {
 Sidebar.defaultProps = {
   numFrames: 0,
   expandedPane: 'NONE',
-  gifData: '',
   ...imageSettingDefaults,
   requestFrame: () => {},
   togglePane: () => {},

@@ -104,11 +104,6 @@ export const updateTextPosition = textOpts => {
   };
 };
 
-export const addGIF = imageData => ({
-  type: types.ADD_GIF,
-  payload: { imageData }
-});
-
 export const undoBurst = (frames, frameIDs) => ({
   type: types.UNDO_BURST,
   payload: { frames, frameIDs }
@@ -304,7 +299,6 @@ export const generateGIF = (images, opts) => async (dispatch, getState) => {
     if (images.length === 1) {
       // Export normal SVG
       dispatch(updateGIFProgress(1));
-      dispatch(addGIF(images[0]));
       download(images[0], gifFileName || 'gifsmos.svg', 'image/svg');
     } else {
       // Export animated SVG (using svgasm)
@@ -312,7 +306,7 @@ export const generateGIF = (images, opts) => async (dispatch, getState) => {
         if (data.error) {
           dispatch(flashError(gifCreationProblem()));
         } else {
-          dispatch(addGIF(data.image));
+          dispatch(updateGIFProgress(1));
           download(data.image, gifFileName || 'gifsmos.svg', 'image/svg');
         }
       });
@@ -324,7 +318,7 @@ export const generateGIF = (images, opts) => async (dispatch, getState) => {
         if (data.error) {
           dispatch(flashError(gifCreationProblem()));
         } else {
-          //dispatch(addGIF(data.image));
+          dispatch(updateGIFProgress(1));
           download(data.image, gifFileName || 'gifsmos.png', 'image/png');
         }
       });
@@ -334,7 +328,7 @@ export const generateGIF = (images, opts) => async (dispatch, getState) => {
         if (data.error) {
           dispatch(flashError(gifCreationProblem()));
         } else {
-          //dispatch(addGIF(data.image));
+          dispatch(updateGIFProgress(1));
           download(data.image, gifFileName || 'gifsmos.mov', 'video/quicktime');
         }
       });

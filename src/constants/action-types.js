@@ -10,7 +10,6 @@
 // Images
 export const ADD_FRAME = 'ADD_FRAME';
 export const UPDATE_GIF_PROGRESS = 'UPDATE_GIF_PROGRESS';
-export const ADD_GIF = 'ADD_GIF';
 export const UNDO_BURST = 'UNDO_BURST';
 export const REDO_FRAME = 'REDO_FRAME';
 export const UPDATE_TEXT = 'UPDATE_TEXT';
