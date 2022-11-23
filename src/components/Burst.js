@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { getCalcState, setCalcState } from '../lib/calc-helpers';
 import { imageSettingPropTypes } from '../lib/propTypes';
 import { imageSettingDefaults } from '../lib/defaultProps';
@@ -98,97 +99,102 @@ class Burst extends Component {
 
     return (
       <div className={classNames('Burst', { 'Burst-expanded': expanded })}>
-        <div className="Burst-header">
-          <h2>Burst</h2>
-          <InfoIcon infoText={burstInfo} />
-        </div>
-        <div className="Burst-options-container">
-          <div className="Burst-dropdown-container">
-            <div data-testid="Burst-slider-index-label">Slider</div>
-            <select
-              className={classNames('Burst-dropdown', {
-                'Burst-input-error': !!errors.idx
+        <OverlayScrollbarsComponent
+          className="overlay-scrollbar"
+          defer
+        >
+          <div className="Burst-header">
+            <h2>Burst</h2>
+            <InfoIcon infoText={burstInfo} />
+          </div>
+          <div className="Burst-options-container">
+            <div className="Burst-dropdown-container">
+              <div data-testid="Burst-slider-index-label">Slider</div>
+              <select
+                className={classNames('Burst-dropdown', {
+                  'Burst-input-error': !!errors.idx
+                })}
+                name="idx"
+                aria-label="slider index"
+                value={idx ? idx : undefined}
+                onChange={this.handleInputUpdate}
+              >
+                {!burstSliders.length ? (
+                  <option value={undefined}>No Sliders</option>
+                ) : null}
+                {burstSliders.map(exp => {
+                  return (
+                    <option
+                      key={`slider-${exp.id}`}
+                      value={exp.expressionIdx}
+                      defaultValue={idx === exp.expressionIdx}
+                    >
+                      {exp.latex
+                        .replace(/\\/g, '')
+                        .split('=')
+                        .join(' = ')}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <div data-testid="Burst-slider-min-label">Slider Min</div>
+            <input
+              className={classNames('Burst-input', {
+                'Burst-input-error': !!errors.min
               })}
-              name="idx"
-              aria-label="slider index"
-              value={idx ? idx : undefined}
+              type="number"
+              name="min"
+              aria-label="slider minimum"
+              value={isNaN(min) ? '' : min}
               onChange={this.handleInputUpdate}
-            >
-              {!burstSliders.length ? (
-                <option value={undefined}>No Sliders</option>
-              ) : null}
-              {burstSliders.map(exp => {
-                return (
-                  <option
-                    key={`slider-${exp.id}`}
-                    value={exp.expressionIdx}
-                    defaultValue={idx === exp.expressionIdx}
-                  >
-                    {exp.latex
-                      .replace(/\\/g, '')
-                      .split('=')
-                      .join(' = ')}
-                  </option>
-                );
+            />
+            <div data-testid="Burst-slider-max-label">Slider Max</div>
+            <input
+              className={classNames('Burst-input', {
+                'Burst-input-error': !!errors.max
               })}
-            </select>
-          </div>
-          <div data-testid="Burst-slider-min-label">Slider Min</div>
-          <input
-            className={classNames('Burst-input', {
-              'Burst-input-error': !!errors.min
-            })}
-            type="number"
-            name="min"
-            aria-label="slider minimum"
-            value={isNaN(min) ? '' : min}
-            onChange={this.handleInputUpdate}
-          />
-          <div data-testid="Burst-slider-max-label">Slider Max</div>
-          <input
-            className={classNames('Burst-input', {
-              'Burst-input-error': !!errors.max
-            })}
-            type="number"
-            name="max"
-            aria-label="slider maximum"
-            value={isNaN(max) ? '' : max}
-            onChange={this.handleInputUpdate}
-          />
-          <div data-testid="Burst-slider-step-label">Slider Step</div>
-          <input
-            className={classNames('Burst-input', {
-              'Burst-input-error': !!errors.step
-            })}
-            type="number"
-            name="step"
-            aria-label="slider step"
-            value={isNaN(step) ? '' : step}
-            onChange={this.handleInputUpdate}
-          />
-          <div>
-            <button
-              className={classNames('Burst-button', {
-                capturing: this.state.isCapturing
+              type="number"
+              name="max"
+              aria-label="slider maximum"
+              value={isNaN(max) ? '' : max}
+              onChange={this.handleInputUpdate}
+            />
+            <div data-testid="Burst-slider-step-label">Slider Step</div>
+            <input
+              className={classNames('Burst-input', {
+                'Burst-input-error': !!errors.step
               })}
-              onClick={this.handleRequestBurst}
-              aria-label="capture several frames"
-            >
-              {this.state.isCapturing ? 'Capturing...' : 'Capture'}
-            </button>
+              type="number"
+              name="step"
+              aria-label="slider step"
+              value={isNaN(step) ? '' : step}
+              onChange={this.handleInputUpdate}
+            />
+            <div>
+              <button
+                className={classNames('Burst-button', {
+                  capturing: this.state.isCapturing
+                })}
+                onClick={this.handleRequestBurst}
+                aria-label="capture several frames"
+              >
+                {this.state.isCapturing ? 'Capturing...' : 'Capture'}
+              </button>
+            </div>
           </div>
-        </div>
-        {this.state.canUndo ? (
-          <div>
-            <button
-              className="Burst-button"
-              onClick={this.handleUndoBurst}
-              aria-label="undo last burst"
-            >
-              Undo
-            </button>
-          </div>
-        ) : null}
+          {this.state.canUndo ? (
+            <div>
+              <button
+                className="Burst-button"
+                onClick={this.handleUndoBurst}
+                aria-label="undo last burst"
+              >
+                Undo
+              </button>
+            </div>
+          ) : null}
+        </OverlayScrollbarsComponent>
       </div>
     );
   }

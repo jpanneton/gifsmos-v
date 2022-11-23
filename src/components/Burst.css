@@ -10,7 +10,6 @@
   transform: translateX(-100%);
   transition: 0.2s transform;
   color: #fff;
-  min-height: 100vh;
 }
 
 .Burst-expanded {
@@ -99,7 +98,6 @@
 }
 
 .Burst-options-container {
-  overflow: auto;
   max-height: calc(100vh - 70px);
   background: #2e2e2e;
 }

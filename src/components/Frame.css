@@ -13,6 +13,7 @@
   max-height: 300px;
   width: auto;
   height: auto;
+  background-color: white;
 }
 
 .Frame-image > svg {
@@ -52,10 +53,14 @@
   position: relative;
 }
 
+.Frame-timeline-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .Frame-timeline {
   display: flex;
-  overflow: scroll;
-  width: 80%;
+  width: 100%;
   margin: 1rem auto;
 }
 
@@ -67,8 +72,8 @@
   width: 150px;
   height: 150px;
   margin: 5px;
-  left: 50px;
   opacity: 0.75;
+  background-color: white;
 }
 
 .Frame-scroll-active {

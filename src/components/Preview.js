@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import Frame from './Frame';
 import InfoIcon from './InfoIcon';
 import GenerateGifFormContainer from '../containers/GenerateGifFormContainer';
@@ -138,119 +139,129 @@ class Preview extends Component {
         className={classNames('Preview', { 'Preview-expanded': expanded })}
         onClick={this.handleClickContainer}
       >
-        <div className="Preview-header">
-          <h2>Preview</h2>
-          <InfoIcon infoText={previewText} />
-        </div>
-        <div className={classNames({ 'Preview-muted': !numFrames })}>
-          <div className="Frame-section-container">
-            <img
-              className="Frame-directional-icon"
-              src={left}
-              onClick={() =>
-                this.handleChangePreviewIdx(Math.max(previewIdx - 1, 0))
-              }
-              alt=""
-            />
-            <Frame
-              imageSrc={imageSrc}
-              playing={playing}
-              togglePlaying={this.handleTogglePlaying}
-              gifText={gifText}
-              fontColor={fontColor}
-              textPosition={textPosition}
-            />
-            <img
-              className="Frame-directional-icon"
-              src={right}
-              onClick={() =>
-                this.handleChangePreviewIdx(
-                  Math.min(previewIdx + 1, frameIDs.length - 1)
-                )
-              }
-              alt=""
-            />
+        <OverlayScrollbarsComponent
+          className="overlay-scrollbar"
+          defer
+        >
+          <div className="Preview-header">
+            <h2>Preview</h2>
+            <InfoIcon infoText={previewText} />
           </div>
-          <div className="Preview-scrubber" data-testid="Preview-scrubber">
-            <input
-              type="range"
-              min="0"
-              max={numFrames - 1}
-              value={previewIdx}
-              onChange={this.handlePreviewUpdate}
-              disabled={!numFrames}
-              aria-label="preview frame index"
-            />
-            <div
-              className="Preview-scrubber-counter"
-              data-testid="Preview-scrubber-counter"
-            >
-              {numFrames ? `${previewIdx + 1} / ${numFrames}` : '0 / 0'}
+          <div className={classNames({ 'Preview-muted': !numFrames })}>
+            <div className="Frame-section-container">
+              <img
+                className="Frame-directional-icon"
+                src={left}
+                onClick={() =>
+                  this.handleChangePreviewIdx(Math.max(previewIdx - 1, 0))
+                }
+                alt=""
+              />
+              <Frame
+                imageSrc={imageSrc}
+                playing={playing}
+                togglePlaying={this.handleTogglePlaying}
+                gifText={gifText}
+                fontColor={fontColor}
+                textPosition={textPosition}
+              />
+              <img
+                className="Frame-directional-icon"
+                src={right}
+                onClick={() =>
+                  this.handleChangePreviewIdx(
+                    Math.min(previewIdx + 1, frameIDs.length - 1)
+                  )
+                }
+                alt=""
+              />
+            </div>
+            <div className="Preview-scrubber" data-testid="Preview-scrubber">
+              <input
+                type="range"
+                min="0"
+                max={numFrames - 1}
+                value={previewIdx}
+                onChange={this.handlePreviewUpdate}
+                disabled={!numFrames}
+                aria-label="preview frame index"
+              />
+              <div
+                className="Preview-scrubber-counter"
+                data-testid="Preview-scrubber-counter"
+              >
+                {numFrames ? `${previewIdx + 1} / ${numFrames}` : '0 / 0'}
+              </div>
             </div>
           </div>
-        </div>
-        <div className="Frame-delete">
-          {numFrames ? (
-            <button
-              className="Frame-delete-redo-button"
-              aria-label="delete this frame"
-              onClick={() => this.handleDeleteFrame(previewIdx)}
-            >
-              Delete this Frame
-            </button>
-          ) : null}
-          {redoFrames.length ? (
-            <button
-              className="Frame-delete-redo-button"
-              aria-label="redo last frame"
-              onClick={this.handleRedoFrame}
-            >
-              Undo Delete
-            </button>
-          ) : null}
-        </div>
-        <div className="Frame-timeline">
-          {frameIDs.map((frameID, i) => (
-            <div
-              className={classNames('Frame-scroll', {
-                'Frame-scroll-active': previewIdx === i
-              })}
-              onClick={() => this.handleChangePreviewIdx(i)}
-              key={`frame-id-${frameID}`}
-              dangerouslySetInnerHTML={{ __html: frames[frameID] }}
-            />
-          ))}
-        </div>
-        {!numFrames ? (
-          <div className="Preview-no-frames">
-            No frames have been captured. Use the camera or burst tools to add
-            some!
+          <div className="Frame-delete">
+            {numFrames ? (
+              <button
+                className="Frame-delete-redo-button"
+                aria-label="delete this frame"
+                onClick={() => this.handleDeleteFrame(previewIdx)}
+              >
+                Delete this Frame
+              </button>
+            ) : null}
+            {redoFrames.length ? (
+              <button
+                className="Frame-delete-redo-button"
+                aria-label="redo last frame"
+                onClick={this.handleRedoFrame}
+              >
+                Undo Delete
+              </button>
+            ) : null}
           </div>
-        ) : null}
-        <div className="Preview-create">
-          {!!numFrames ? (
-            <GenerateGifFormContainer
-              handleGenerateGIF={this.handleGenerateGIF}
-              showColorPicker={this.state.showColorPicker}
-              updateColorPicker={this.updateColorPicker}
-            />
+          <OverlayScrollbarsComponent
+              className="Frame-timeline-container"
+              defer
+          >
+            <div className="Frame-timeline">
+              {frameIDs.map((frameID, i) => (
+                <div
+                  className={classNames('Frame-scroll', {
+                    'Frame-scroll-active': previewIdx === i
+                  })}
+                  onClick={() => this.handleChangePreviewIdx(i)}
+                  key={`frame-id-${frameID}`}
+                  dangerouslySetInnerHTML={{ __html: frames[frameID] }}
+                />
+              ))}
+            </div>
+          </OverlayScrollbarsComponent>
+          {!numFrames ? (
+            <div className="Preview-no-frames">
+              No frames have been captured. Use the camera or burst tools to add
+              some!
+            </div>
           ) : null}
-        </div>
-        {gifProgress > 0 ? (
-          <div className="Preview-progress-outer">
-            <div
-              className="Preview-progress-inner"
-              style={{
-                width: `${100 * gifProgress}%`,
-                background: gifProgress === 1 ? '#2ecc40' : '#1869FF'
-              }}
-            />
-            <p>{Math.round(100 * gifProgress)}%</p>
+          <div className="Preview-create">
+            {!!numFrames ? (
+              <GenerateGifFormContainer
+                handleGenerateGIF={this.handleGenerateGIF}
+                showColorPicker={this.state.showColorPicker}
+                updateColorPicker={this.updateColorPicker}
+              />
+            ) : null}
           </div>
-        ) : null}
-        {gifProgress === 1 ? (
-          <div className="Preview-progress-success">Download Successful</div>
-        ) : null}
+          {gifProgress > 0 ? (
+            <div className="Preview-progress-outer">
+              <div
+                className="Preview-progress-inner"
+                style={{
+                  width: `${100 * gifProgress}%`,
+                  background: gifProgress === 1 ? '#2ecc40' : '#1869FF'
+                }}
+              />
+              <p>{Math.round(100 * gifProgress)}%</p>
+            </div>
+          ) : null}
+          {gifProgress === 1 ? (
+            <div className="Preview-progress-success">Download Successful</div>
+          ) : null}
+        </OverlayScrollbarsComponent>
       </div>
     );
   }

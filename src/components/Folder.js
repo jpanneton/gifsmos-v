@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import {
   getSavedGraphsList,
   removeGraphFromLocal
@@ -115,35 +116,40 @@ class Folder extends Component {
           'Folder-expanded': expanded
         })}
       >
-        <div className="Folder-header">
-          <h2>Folder</h2>
-          <InfoIcon infoText={folderText} />
-        </div>
-        <div>
-          <div className="Folder-titles">Name</div>
-          <input
-            className={classNames('Folder-input', {
-              'Folder-input-error': !!errors.name
-            })}
-            type="text"
-            name="name"
-            placeholder="Graph name"
-            aria-label="graph name"
-            value={name}
-            onChange={this.handleInputUpdate}
-          />
-          <div>
-            <button
-              className="Folder-button Folder-save"
-              onClick={this.handleSaveCurrent}
-              aria-label="Save this graph"
-            >
-              Save
-            </button>
+        <OverlayScrollbarsComponent
+          className="overlay-scrollbar"
+          defer
+        >
+          <div className="Folder-header">
+            <h2>Folder</h2>
+            <InfoIcon infoText={folderText} />
           </div>
-        </div>
-        <div className="Folder-titles">Saved Graphs</div>
-        <div className="Folder-previous-items">{savedList}</div>
+          <div>
+            <div className="Folder-titles">Name</div>
+            <input
+              className={classNames('Folder-input', {
+                'Folder-input-error': !!errors.name
+              })}
+              type="text"
+              name="name"
+              placeholder="Graph name"
+              aria-label="graph name"
+              value={name}
+              onChange={this.handleInputUpdate}
+            />
+            <div>
+              <button
+                className="Folder-button Folder-save"
+                onClick={this.handleSaveCurrent}
+                aria-label="Save this graph"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+          <div className="Folder-titles">Saved Graphs</div>
+          <div className="Folder-previous-items">{savedList}</div>
+        </OverlayScrollbarsComponent>
       </div>
     );
   }

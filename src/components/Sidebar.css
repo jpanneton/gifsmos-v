@@ -7,7 +7,6 @@
   width: 70px;
   border-right: 1px solid black;
   background: #2e2e2e;
-  min-height: 100vh;
 }
 
 .Sidebar-help {
@@ -31,9 +30,5 @@
 @media (max-height: 480px) {
   .Sidebar-help {
     display: none;
-  }
-
-  .Sidebar {
-    overflow: auto;
   }
 }

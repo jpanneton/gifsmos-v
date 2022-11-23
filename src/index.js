@@ -9,6 +9,7 @@ import panes from './constants/pane-types';
 import { togglePane } from './actions';
 import greet from './lib/dev-greeting';
 import './index.css';
+import 'overlayscrollbars/overlayscrollbars.css';
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 

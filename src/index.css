@@ -13,8 +13,9 @@ code {
     monospace;
 }
 
-svg {
-  background-color: white;
+.overlay-scrollbar {
+  width: 100%;
+  height: 100%;
 }
 
 .disabled-feature {

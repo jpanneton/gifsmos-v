@@ -10,7 +10,6 @@
   transform: translateX(-100%);
   transition: 0.2s transform;
   color: #fff;
-  min-height: 100vh;
 }
 
 .Folder-expanded {
@@ -84,6 +83,7 @@
   overflow: hidden;
   width: 40px;
   height: 40px;
+  background-color: white;
 }
 
 .Folder-item-text {

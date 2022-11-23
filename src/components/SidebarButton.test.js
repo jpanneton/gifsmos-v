@@ -11,7 +11,6 @@ describe('<SidebarButton/>', () => {
 
   it('renders appropriate content', () => {
     const { container } = render(<SidebarButton icon="icon" />);
-    expect(container.querySelector('.SidebarButton-tooltiptext')).toBeTruthy();
     expect(container.querySelector('button.SidebarButton')).toBeTruthy();
     expect(container.querySelector('img[alt="icon icon"]')).toBeTruthy();
   });

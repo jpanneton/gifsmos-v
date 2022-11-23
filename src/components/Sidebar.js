@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { imageSettingPropTypes } from '../lib/propTypes';
 import { imageSettingDefaults } from '../lib/defaultProps';
 import SidebarButton from './SidebarButton';
@@ -65,46 +66,51 @@ class Sidebar extends Component {
 
     return (
       <div className="Sidebar">
-        <SidebarButton icon="camera" onClick={this.handleRequestFrame} />
+        <OverlayScrollbarsComponent
+          className="overlay-scrollbar"
+          defer
+        >
+          <SidebarButton icon="camera" onClick={this.handleRequestFrame} />
 
-        <SidebarButton
-          icon="burst"
-          expanded={expandedPane === panes.BURST}
-          onClick={this.handleToggleBurst}
-        />
-
-        <SidebarButtonWithBadge
-          icon="preview"
-          expanded={expandedPane === panes.PREVIEW}
-          onClick={this.handleTogglePreview}
-          color="orange"
-          showBadge={!!numFrames}
-          value={numFrames > 99 ? '99+' : numFrames.toString()}
-        />
-
-        <SidebarButton
-          icon="saved"
-          expanded={expandedPane === panes.FILES}
-          onClick={this.handleToggleFiles}
-        />
-
-        <SidebarButton
-          icon="settings"
-          expanded={expandedPane === panes.SETTINGS}
-          onClick={this.handleToggleSettings}
-        />
-
-        {!!numFrames && <SidebarButton icon="reset" onClick={reset} />}
-
-        <div className="Sidebar-help" onClick={this.toggleHelpModal}>
-          <p>Help</p>
-        </div>
-        <div>
-          <HelpModal
-            showHelpModal={this.state.showHelpModal}
-            toggleHelpModal={this.toggleHelpModal}
+          <SidebarButton
+            icon="burst"
+            expanded={expandedPane === panes.BURST}
+            onClick={this.handleToggleBurst}
           />
-        </div>
+
+          <SidebarButtonWithBadge
+            icon="preview"
+            expanded={expandedPane === panes.PREVIEW}
+            onClick={this.handleTogglePreview}
+            color="orange"
+            showBadge={!!numFrames}
+            value={numFrames > 99 ? '99+' : numFrames.toString()}
+          />
+
+          <SidebarButton
+            icon="saved"
+            expanded={expandedPane === panes.FILES}
+            onClick={this.handleToggleFiles}
+          />
+
+          <SidebarButton
+            icon="settings"
+            expanded={expandedPane === panes.SETTINGS}
+            onClick={this.handleToggleSettings}
+          />
+
+          {!!numFrames && <SidebarButton icon="reset" onClick={reset} />}
+
+          <div className="Sidebar-help" onClick={this.toggleHelpModal}>
+            <p>Help</p>
+          </div>
+          <div>
+            <HelpModal
+              showHelpModal={this.state.showHelpModal}
+              toggleHelpModal={this.toggleHelpModal}
+            />
+          </div>
+        </OverlayScrollbarsComponent>
       </div>
     );
   }

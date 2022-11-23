@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { imageSettingPropTypes } from '../lib/propTypes';
 import { imageSettingDefaults } from '../lib/defaultProps';
 import classNames from 'classnames';
@@ -43,74 +44,79 @@ class Settings extends Component {
       <div
         className={classNames('Settings', { 'Settings-expanded': expanded })}
       >
-        <div className="Settings-header">
-          <h2>Settings</h2>
-          <InfoIcon infoText={settingsText} />
-        </div>
+        <OverlayScrollbarsComponent
+          className="overlay-scrollbar"
+          defer
+        >
+          <div className="Settings-header">
+            <h2>Settings</h2>
+            <InfoIcon infoText={settingsText} />
+          </div>
 
-        <div className="Settings-options-container">
-          <div>Image Width</div>
-          <input
-            className={classNames('Settings-input', {
-              'Settings-input-error': !isPositiveInteger(width)
-            })}
-            type="number"
-            name="width"
-            aria-label="image width"
-            value={isNaN(width) ? '' : width}
-            onChange={this.handleInputUpdate}
-          />
+          <div className="Settings-options-container">
+            <div>Image Width</div>
+            <input
+              className={classNames('Settings-input', {
+                'Settings-input-error': !isPositiveInteger(width)
+              })}
+              type="number"
+              name="width"
+              aria-label="image width"
+              value={isNaN(width) ? '' : width}
+              onChange={this.handleInputUpdate}
+            />
 
-          <div>Image Height</div>
-          <input
-            className={classNames('Settings-input', {
-              'Settings-input-error': !isPositiveInteger(height)
-            })}
-            type="number"
-            name="height"
-            aria-label="image height"
-            value={isNaN(height) ? '' : height}
-            onChange={this.handleInputUpdate}
-          />
+            <div>Image Height</div>
+            <input
+              className={classNames('Settings-input', {
+                'Settings-input-error': !isPositiveInteger(height)
+              })}
+              type="number"
+              name="height"
+              aria-label="image height"
+              value={isNaN(height) ? '' : height}
+              onChange={this.handleInputUpdate}
+            />
 
-          <div>Interval (ms)</div>
-          <input
-            className={classNames('Settings-input', {
-              'Settings-input-error': !isPositiveInteger(interval)
-            })}
-            type="number"
-            name="interval"
-            aria-label="frame interval"
-            value={isNaN(interval) ? '' : interval}
-            onChange={this.handleInputUpdate}
-          />
+            <div>Interval (ms)</div>
+            <input
+              className={classNames('Settings-input', {
+                'Settings-input-error': !isPositiveInteger(interval)
+              })}
+              type="number"
+              name="interval"
+              aria-label="frame interval"
+              value={isNaN(interval) ? '' : interval}
+              onChange={this.handleInputUpdate}
+            />
 
-          <div>Strategy</div>
-          <select
-            className="Settings-dropdown"
-            name="strategy"
-            aria-label="strategy"
-            onChange={this.handleStrategyUpdate}
-          >
-            <option value="contain" defaultValue>
-              Contain
-            </option>
-            <option value="stretch">Stretch</option>
-            <option value="preserveX">PreserveX</option>
-            <option value="preserveY">PreserveY</option>
-          </select>
-        </div>
+            <div>Strategy</div>
+            <select
+              className="Settings-dropdown"
+              name="strategy"
+              aria-label="strategy"
+              onChange={this.handleStrategyUpdate}
+            >
+              <option value="contain" defaultValue>
+                Contain
+              </option>
+              <option value="stretch">Stretch</option>
+              <option value="preserveX">PreserveX</option>
+              <option value="preserveY">PreserveY</option>
+            </select>
+          </div>
 
-        <div className="disabled-feature">
-          <input
-            type="checkbox"
-            name="oversample"
-            aria-label="oversample image"
-            checked={oversample}
-            onChange={this.handleInputUpdate}
-          />
-          <span>Oversample</span>
-        </div>
+          <div className="disabled-feature">
+            <input
+              type="checkbox"
+              name="oversample"
+              aria-label="oversample image"
+              checked={oversample}
+              onChange={this.handleInputUpdate}
+            />
+            <span>Oversample</span>
+          </div>
+        </OverlayScrollbarsComponent>
       </div>
     );
   }
