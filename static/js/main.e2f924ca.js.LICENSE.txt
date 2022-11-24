@@ -4,6 +4,16 @@
 	http://jedwatson.github.io/classnames
 */
 
+/*!
+ * OverlayScrollbars
+ * Version: 2.0.1
+ *
+ * Copyright (c) Rene Haas | KingSora.
+ * https://github.com/KingSora
+ *
+ * Released under the MIT license.
+ */
+
 /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
 
 /**
