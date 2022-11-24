@@ -3,7 +3,7 @@
  * Copyright (C) 2021 Tom Kwok https://tomkwok.com/
  * Copyright (C) 2021 Jérémi Panneton https://jpanneton.dev/
  */
-export const createSVG = async (args, cb) => {
+export const createAnimatedSVG = async (args, cb) => {
   const images = args.images;
   const animationTiming = 'linear';
 
@@ -41,6 +41,15 @@ export const createSVG = async (args, cb) => {
         output += `#_${j}`;
       }
       output += '{visibility:hidden}</style></defs>';
+
+      // Add background element (if requested)
+      if (!args.transparentBackground) {
+        output += createBackgroundElement(
+          args.animationBackground,
+          args.gifWidth,
+          args.gifHeight
+        );
+      }
     }
 
     // Find the first occurrence of '</svg>' in string
@@ -94,4 +103,61 @@ export const createSVG = async (args, cb) => {
   output += closingTag;
 
   return cb({ image: output });
+};
+
+export const createSVG = async (args, cb) => {
+  return cb({ image: updateSVGBackground(args.image, args) });
+};
+
+export const updateSVGBackground = (svgData, args) => {
+  if (!args.transparentBackground) {
+    // Find the first occurrence of '<svg'
+    const svgTagStart = svgData.indexOf('<svg');
+    // Find the first occurrence of '>' after '<svg'
+    const svgTagStartEnd = svgData.indexOf('>', svgTagStart) + 1;
+
+    // Define background element
+    const backgroundElement = createBackgroundElement(
+      args.animationBackground,
+      args.gifWidth,
+      args.gifHeight
+    );
+
+    // Insert background element
+    svgData = svgData.slice(0, svgTagStartEnd) + backgroundElement + svgData.slice(svgTagStartEnd);
+  }
+  return svgData;
+};
+
+export const addSVGBackground = (svgData, backgroundColor) => {
+  if (svgData) {
+    // Find the first occurrence of '<svg'
+    const svgTagStart = svgData.indexOf('<svg');
+    // Find the first occurrence of '>' after '<svg'
+    const svgTagStartEnd = svgData.indexOf('>', svgTagStart) + 1;
+
+    // Get viewBox frame dimensions
+    const viewboxStart = svgData.indexOf('viewBox="', svgTagStart) + 9;
+    const viewboxEnd = svgData.indexOf('"', viewboxStart);
+    const viewbox = svgData.substr(viewboxStart, viewboxEnd - viewboxStart).split(' ');
+    const width = parseInt(viewbox[2]);
+    const height = parseInt(viewbox[3]);
+
+    // Define background element
+    const backgroundElement = createBackgroundElement(
+      backgroundColor,
+      width,
+      height
+    );
+
+    // Insert background element
+    svgData = svgData.slice(0, svgTagStartEnd) + backgroundElement + svgData.slice(svgTagStartEnd);
+  }
+  return svgData;
+};
+
+const createBackgroundElement = (color, width, height) => {
+  return `<path fill="${color}" ` +
+  `class="dcg-svg-background" ` +
+  `d="M0 0h${width}v${height}H0z"/>`;
 };

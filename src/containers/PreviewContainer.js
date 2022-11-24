@@ -17,11 +17,9 @@ const mapStateToProps = (state, ownProps) => {
     frames,
     frameIDs,
     gifProgress,
-    gifText,
-    fontColor,
-    redoFrames,
-    textAlign,
-    textBaseline
+    transparentBackground,
+    animationBackground,
+    redoFrames
   } = images;
   const { width, height, oversample, interval } = settings.image;
 
@@ -37,10 +35,8 @@ const mapStateToProps = (state, ownProps) => {
     oversample,
     interval,
     redoFrames,
-    gifText,
-    fontColor,
-    textAlign,
-    textBaseline
+    transparentBackground,
+    animationBackground
   };
 };
 

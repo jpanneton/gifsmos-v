@@ -1,3 +1,4 @@
+import { updateSVGBackground } from '../lib/svgasm';
 import { Canvg, presets } from 'canvg'
 import { createFFmpeg } from '@ffmpeg/ffmpeg';
 
@@ -20,24 +21,12 @@ export const createMOV = async (args, cb) => {
 
   await ffmpeg.load();
 
-  let width = 0;
-  let height = 0;
+  const width = args.gifWidth;
+  const height = args.gifHeight;
   let output = '';
 
   for (let i = 0; i < images.length; i++) {
-    let svgData = images[i];
-
-    // Find the first occurrence of '<svg'
-    const svgTagStart = svgData.indexOf('<svg');
-
-    if (i === 0) {
-      // Get viewBox frame dimensions
-      const viewboxStart = svgData.indexOf('viewBox="', svgTagStart) + 9;
-      const viewboxEnd = svgData.indexOf('"', viewboxStart);
-      const viewbox = svgData.substr(viewboxStart, viewboxEnd - viewboxStart).split(' ');
-      width = parseInt(viewbox[2]);
-      height = parseInt(viewbox[3]);
-    }
+    const svgData = await updateSVGBackground(images[i], args);
 
     // Setup canvg with SVG data
     const canvas = new OffscreenCanvas(width, height);
@@ -75,17 +64,11 @@ export const createMOV = async (args, cb) => {
 };
 
 export const createPNG = async (args, cb) => {
-  let svgData = args.images[0];
+  const svgData = await updateSVGBackground(args.image, args);
 
-  // Find the first occurrence of '<svg'
-  const svgTagStart = svgData.indexOf('<svg');
-
-  // Get viewBox frame dimensions
-  const viewboxStart = svgData.indexOf('viewBox="', svgTagStart) + 9;
-  const viewboxEnd = svgData.indexOf('"', viewboxStart);
-  const viewbox = svgData.substr(viewboxStart, viewboxEnd - viewboxStart).split(' ');
-  const width = parseInt(viewbox[2]);
-  const height = parseInt(viewbox[3]);
+  // Get frame dimensions
+  const width = args.gifWidth;
+  const height = args.gifHeight;
 
   // Setup canvg with SVG data
   const canvas = new OffscreenCanvas(width, height);

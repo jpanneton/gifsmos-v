@@ -35,7 +35,7 @@ import {
   saveCurrentGraph
 } from '../lib/calc-helpers';
 
-import { createSVG } from '../lib/svgasm';
+import { createAnimatedSVG, createSVG } from '../lib/svgasm';
 import { createMOV, createPNG } from '../lib/movasm';
 import { startTimer, clearTimer } from '../lib/timer';
 
@@ -86,23 +86,15 @@ export const updateGIFFileName = name => {
   };
 };
 
-export const updateText = text => ({
-  type: types.UPDATE_TEXT,
-  payload: { text }
+export const updateTransparentBackground = transparentBackground => ({
+  type: types.UPDATE_TRANSPARENT_BACKGROUND,
+  payload: { transparentBackground }
 });
 
-export const updateTextColor = fontColor => ({
-  type: types.UPDATE_TEXT_COLOR,
-  payload: { fontColor }
+export const updateAnimationBackground = animationBackground => ({
+  type: types.UPDATE_ANIMATION_BACKGROUND,
+  payload: { animationBackground }
 });
-
-export const updateTextPosition = textOpts => {
-  let { textAlign, textBaseline } = textOpts;
-  return {
-    type: types.UPDATE_TEXT_POSITION,
-    payload: { textAlign, textBaseline }
-  };
-};
 
 export const undoBurst = (frames, frameIDs) => ({
   type: types.UNDO_BURST,
@@ -290,7 +282,8 @@ export const generateGIF = (images, opts) => async (dispatch, getState) => {
   }
 
   const generationArgs = {
-    images,
+    ...(images.length !== 1 && {images: images}),
+    ...(images.length === 1 && {image: images[0]}),
     ...opts,
     progressCallback: progress => dispatch(updateGIFProgress(progress))
   };
@@ -298,11 +291,17 @@ export const generateGIF = (images, opts) => async (dispatch, getState) => {
   if (opts.animationFormat === 'SVG') {
     if (images.length === 1) {
       // Export normal SVG
-      dispatch(updateGIFProgress(1));
-      download(images[0], gifFileName || 'gifsmos.svg', 'image/svg');
+      await createSVG(generationArgs, data => {
+        if (data.error) {
+          dispatch(flashError(gifCreationProblem()));
+        } else {
+          dispatch(updateGIFProgress(1));
+          download(data.image, gifFileName || 'gifsmos.svg', 'image/svg');
+        }
+      });
     } else {
       // Export animated SVG (using svgasm)
-      await createSVG(generationArgs, data => {
+      await createAnimatedSVG(generationArgs, data => {
         if (data.error) {
           dispatch(flashError(gifCreationProblem()));
         } else {

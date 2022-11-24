@@ -119,8 +119,8 @@ and is encoded using the PNG codec. This feature is useful if you want to embed
 the animation in a video (e.g. for YouTube) using a video editing software.
 Unlike the original GIFsmos, background transparency is preserved. Note that
 a single frame will be exported in PNG (image format). Also, processing time
-may be quite long (using [ffmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm)
-in single-threaded mode for browser compatibility).
+may be quite long, since it's using [ffmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm)
+in single-threaded mode under the hood (for browser compatibility).
 
 ## Developer quick-start
 

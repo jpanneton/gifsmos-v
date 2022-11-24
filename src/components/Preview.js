@@ -2,20 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import { addSVGBackground } from '../lib/svgasm';
 import Frame from './Frame';
 import InfoIcon from './InfoIcon';
 import GenerateGifFormContainer from '../containers/GenerateGifFormContainer';
 import './Preview.css';
 import left from './icons/left.svg';
 import right from './icons/right.svg';
-import getTextPosition from '../lib/text-preview-helper';
 
 class Preview extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showColorPicker: false
-    };
 
     this.handleGenerateGIF = this.handleGenerateGIF.bind(this);
     this.handlePreviewUpdate = this.handlePreviewUpdate.bind(this);
@@ -23,8 +20,6 @@ class Preview extends Component {
     this.handleDeleteFrame = this.handleDeleteFrame.bind(this);
     this.handleChangePreviewIdx = this.handleChangePreviewIdx.bind(this);
     this.handleRedoFrame = this.handleRedoFrame.bind(this);
-    this.handleClickContainer = this.handleClickContainer.bind(this);
-    this.updateColorPicker = this.updateColorPicker.bind(this);
   }
 
   handlePreviewUpdate(evt) {
@@ -43,10 +38,8 @@ class Preview extends Component {
       oversample,
       interval,
       generateGIF,
-      gifText,
-      fontColor,
-      textAlign,
-      textBaseline
+      transparentBackground,
+      animationBackground
     } = this.props;
 
     const images = frameIDs.map(id => frames[id]);
@@ -56,24 +49,10 @@ class Preview extends Component {
       gifWidth: width * multiplier,
       gifHeight: height * multiplier,
       interval: interval / 1000,
-      text: gifText,
-      fontColor: fontColor,
-      textAlign: textAlign,
-      textBaseline: textBaseline
+      transparentBackground: transparentBackground,
+      animationBackground: animationBackground
     };
     await generateGIF(images, opts);
-  }
-
-  updateColorPicker(status) {
-    this.setState({ showColorPicker: status });
-  }
-
-  handleClickContainer(evt) {
-    if (evt.target.className === 'Preview Preview-expanded') {
-      this.setState({
-        showColorPicker: false
-      });
-    }
   }
 
   handleTogglePlaying() {
@@ -117,16 +96,11 @@ class Preview extends Component {
       gifProgress,
       playing,
       redoFrames,
-      gifText,
-      fontColor,
-      textAlign,
-      textBaseline
+      animationBackground
     } = this.props;
 
     const numFrames = frameIDs.length;
     const imageSrc = frames[frameIDs[previewIdx]];
-
-    let textPosition = getTextPosition(textAlign, textBaseline);
 
     if (!expanded) return <div className="Preview" />;
 
@@ -137,7 +111,6 @@ class Preview extends Component {
     return (
       <div
         className={classNames('Preview', { 'Preview-expanded': expanded })}
-        onClick={this.handleClickContainer}
       >
         <OverlayScrollbarsComponent
           className="overlay-scrollbar"
@@ -161,9 +134,7 @@ class Preview extends Component {
                 imageSrc={imageSrc}
                 playing={playing}
                 togglePlaying={this.handleTogglePlaying}
-                gifText={gifText}
-                fontColor={fontColor}
-                textPosition={textPosition}
+                animationBackground={animationBackground}
               />
               <img
                 className="Frame-directional-icon"
@@ -226,7 +197,9 @@ class Preview extends Component {
                   })}
                   onClick={() => this.handleChangePreviewIdx(i)}
                   key={`frame-id-${frameID}`}
-                  dangerouslySetInnerHTML={{ __html: frames[frameID] }}
+                  dangerouslySetInnerHTML={{
+                    __html: addSVGBackground(frames[frameID], animationBackground)
+                  }}
                 />
               ))}
             </div>
@@ -241,8 +214,7 @@ class Preview extends Component {
             {!!numFrames ? (
               <GenerateGifFormContainer
                 handleGenerateGIF={this.handleGenerateGIF}
-                showColorPicker={this.state.showColorPicker}
-                updateColorPicker={this.updateColorPicker}
+                numFrames={numFrames}
               />
             ) : null}
           </div>

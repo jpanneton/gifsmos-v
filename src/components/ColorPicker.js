@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SketchPicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 
 class ColorPicker extends Component {
   constructor(props) {
@@ -8,16 +8,17 @@ class ColorPicker extends Component {
   }
 
   handleInputUpdate(color) {
-    this.props.updateTextColor(color.hex);
+    this.props.updateAnimationBackground(color.hex);
   }
 
   render() {
     return (
       <div>
-        <SketchPicker
-          className="ColorPicker-SketchPicker"
+        <ChromePicker
+          className="ColorPicker"
           onChange={this.handleInputUpdate}
-          color={this.props.textColor}
+          color={this.props.animationBackground}
+          disableAlpha={true}
         />
       </div>
     );

@@ -15,8 +15,8 @@ const initialState = {
     frames: {},
     frameIDs: [],
     gifProgress: 0,
-    gifText: '',
-    fontColor: '#000000',
+    transparentBackground: true,
+    animationBackground: '#FFFFFF',
     gifFileName: ''
   },
   settings: {
@@ -82,34 +82,22 @@ describe('Action creators', () => {
       expect(actions.updateGIFFileName('name')).toEqual(expected);
     });
 
-    it('return an action to update GIF text', () => {
-      const text = 'text';
+    it('return an action to update GIF background transparency', () => {
+      const transparentBackground = true;
       const expected = {
-        type: types.UPDATE_TEXT,
-        payload: { text }
+        type: types.UPDATE_TRANSPARENT_BACKGROUND,
+        payload: { transparentBackground }
       };
-      expect(actions.updateText('text')).toEqual(expected);
+      expect(actions.updateTransparentBackground(true)).toEqual(expected);
     });
 
-    it('return an action to update GIF text color', () => {
-      const fontColor = '#FFFFFF';
+    it('return an action to update GIF background color', () => {
+      const animationBackground = '#FFFFFF';
       const expected = {
-        type: types.UPDATE_TEXT_COLOR,
-        payload: { fontColor }
+        type: types.UPDATE_ANIMATION_BACKGROUND,
+        payload: { animationBackground }
       };
-      expect(actions.updateTextColor('#FFFFFF')).toEqual(expected);
-    });
-
-    it('return an action to update GIF text position', () => {
-      const textOpts = {
-        textAlign: 'left',
-        textBaseline: 'top'
-      };
-      const expected = {
-        type: types.UPDATE_TEXT_POSITION,
-        payload: { textAlign: 'left', textBaseline: 'top' }
-      };
-      expect(actions.updateTextPosition(textOpts)).toEqual(expected);
+      expect(actions.updateAnimationBackground('#FFFFFF')).toEqual(expected);
     });
 
     it('return an action to undo a captured burst', () => {

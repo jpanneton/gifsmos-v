@@ -10,9 +10,9 @@ describe('<Frame/>', () => {
   });
 
   it('renders appropriate content', () => {
-    const { container } = render(<Frame imageSrc="test" />);
-    expect(container.querySelector('.Frame-container').firstChild.tagName).toBe(
-      'DIV'
+    const { container } = render(<Frame imageSrc='<svg viewBox="0 0 0 0"></svg>' />);
+    expect(container.querySelector('.Frame-image').firstChild.tagName).toBe(
+      'svg'
     );
   });
 

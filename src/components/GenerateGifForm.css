@@ -16,17 +16,18 @@
   text-align: center;
 }
 
-.GenerateGifForm-select {
-  width: 210px;
-  margin: 15px auto 0;
-  border: none;
-  height: 33px;
-  font-size: 1em;
-  text-align: center;
-}
-
 .GenerateGifForm-input-error {
   border-color: #cc0000;
+}
+
+.GenerateGifForm-check {
+  display: block;
+  height: 20px;
+  width: 200px;
+  margin: 15px auto 0;
+  font-size: 1em;
+  padding: 5px;
+  outline: none !important;
 }
 
 .GenerateGifForm-button {
@@ -56,23 +57,8 @@
 }
 
 .ColorPicker {
-  display: block;
-  width: 210px;
-  margin: 15px auto 0;
-  color: #fff;
-  font-size: 1em;
-  padding: 5px;
-  border-radius: 5px;
-  text-align: center;
-  border: none;
-}
-
-.ColorPicker:hover {
-  cursor: pointer;
-}
-
-.ColorPicker-SketchPicker {
   display: inline-block;
+  max-width: 200px;
   margin: 15px auto 0;
   font-size: 1em;
   padding: 5px;

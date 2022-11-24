@@ -9,15 +9,18 @@
 }
 
 .Frame-image {
-  max-width: 300px;
-  max-height: 300px;
-  width: auto;
-  height: auto;
+  min-width: 300px;
+  min-height: 300px;
   background-color: white;
 }
 
-.Frame-image > svg {
-  margin: auto;
+.Frame-image svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
 }
 
 .Frame-animation-button {
@@ -76,6 +79,15 @@
   background-color: white;
 }
 
+.Frame-scroll svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+}
+
 .Frame-scroll-active {
   outline: 5px solid #1869ff;
   opacity: 1;
@@ -127,46 +139,4 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.Frame-container {
-  position: relative;
-  height: 300px;
-  width: 300px;
-}
-
-.Frame-container-text {
-  position: absolute;
-}
-
-.Frame-container-text.top-left {
-  top: -15px;
-  left: 0px;
-}
-
-.Frame-container-text.top-center {
-  text-align: center;
-  top: -15px;
-  width: 100%;
-}
-
-.Frame-container-text.top-right {
-  top: -15px;
-  right: 2px;
-}
-
-.Frame-container-text.bottom-left {
-  bottom: -15px;
-  left: 0px;
-}
-
-.Frame-container-text.bottom-center {
-  text-align: center;
-  bottom: -15px;
-  width: 100%;
-}
-
-.Frame-container-text.bottom-right {
-  right: 2px;
-  bottom: -15px;
 }

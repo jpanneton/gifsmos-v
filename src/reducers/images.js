@@ -18,9 +18,8 @@ import {
   UPDATE_BOUNDS_SETTING,
   UPDATE_STRATEGY,
   RESET,
-  UPDATE_TEXT,
-  UPDATE_TEXT_COLOR,
-  UPDATE_TEXT_POSITION
+  UPDATE_TRANSPARENT_BACKGROUND,
+  UPDATE_ANIMATION_BACKGROUND
 } from '../constants/action-types';
 
 const initialState = {
@@ -28,10 +27,8 @@ const initialState = {
   frameIDs: [],
   redoFrames: [],
   gifProgress: 0,
-  gifText: '',
-  textAlign: 'center',
-  textBaseline: 'bottom',
-  fontColor: '#000000',
+  transparentBackground: true,
+  animationBackground: '#FFFFFF',
   gifFileName: ''
 };
 
@@ -133,23 +130,16 @@ const images = (state = initialState, { type, payload }) => {
         }
       };
 
-    case UPDATE_TEXT:
+    case UPDATE_TRANSPARENT_BACKGROUND:
       return {
         ...state,
-        gifText: payload.text
+        transparentBackground: payload.transparentBackground
       };
 
-    case UPDATE_TEXT_COLOR:
+    case UPDATE_ANIMATION_BACKGROUND:
       return {
         ...state,
-        fontColor: payload.fontColor
-      };
-
-    case UPDATE_TEXT_POSITION:
-      return {
-        ...state,
-        textAlign: payload.textAlign,
-        textBaseline: payload.textBaseline
+        animationBackground: payload.animationBackground
       };
 
     case RESET:

@@ -5,11 +5,8 @@ import {
   UPDATE_GIF_FILENAME,
   UNDO_BURST,
   UPDATE_IMAGE_SETTING,
-  UPDATE_BOUNDS_SETTING,
-  UPDATE_STRATEGY,
-  UPDATE_TEXT,
-  UPDATE_TEXT_COLOR,
-  UPDATE_TEXT_POSITION,
+  UPDATE_TRANSPARENT_BACKGROUND,
+  UPDATE_ANIMATION_BACKGROUND,
   RESET
 } from '../constants/action-types';
 
@@ -18,11 +15,9 @@ const initialState = {
   frameIDs: [],
   redoFrames: [],
   gifProgress: 0,
-  gifText: '',
-  fontColor: '#000000',
-  gifFileName: '',
-  textAlign: 'center',
-  textBaseline: 'bottom'
+  transparentBackground: true,
+  animationBackground: '#FFFFFF',
+  gifFileName: ''
 };
 
 describe('reducers', () => {
@@ -86,34 +81,22 @@ describe('reducers', () => {
       expect(finalState.gifProgress).toEqual(0);
     });
 
-    it('handles UPDATE_TEXT', () => {
-      const text = 'text';
+    it('handles UPDATE_TRANSPARENT_BACKGROUND', () => {
+      const transparentBackground = true;
       const newState = reducer(initialState, {
-        type: UPDATE_TEXT,
-        payload: { text }
+        type: UPDATE_TRANSPARENT_BACKGROUND,
+        payload: { transparentBackground }
       });
-      expect(newState.gifText).toEqual(text);
+      expect(newState.transparentBackground).toEqual(transparentBackground);
     });
 
-    it('handles UPDATE_TEXT_COLOR', () => {
-      const fontColor = '#FFFFFF';
+    it('handles UPDATE_ANIMATION_BACKGROUND', () => {
+      const animationBackground = '#FFFFFF';
       const newState = reducer(initialState, {
-        type: UPDATE_TEXT_COLOR,
-        payload: { fontColor }
+        type: UPDATE_ANIMATION_BACKGROUND,
+        payload: { animationBackground }
       });
-      expect(newState.fontColor).toEqual(fontColor);
-    });
-
-    it('handles UPDATE_TEXT_POSITION', () => {
-      const textAlign = 'left';
-      const textBaseline = 'top';
-
-      const newState = reducer(initialState, {
-        type: UPDATE_TEXT_POSITION,
-        payload: { textAlign, textBaseline }
-      });
-      expect(newState.textAlign).toEqual(textAlign);
-      expect(newState.textBaseline).toEqual(textBaseline);
+      expect(newState.animationBackground).toEqual(animationBackground);
     });
 
     it('handles RESET', () => {
