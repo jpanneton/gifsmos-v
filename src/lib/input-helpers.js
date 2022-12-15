@@ -1,27 +1,67 @@
 /*
- * Helpers to detect errors in user inputs.
+ * Helpers to validate and detect errors in user inputs.
  */
 
-export const isPositiveInteger = val => {
-  if (isNaN(val)) return false;
-  if (Math.round(val) !== val) return false;
-  return val > 0;
+export const isPositiveValue = value => {
+  return !isNaN(value) && value > 0;
+};
+
+export const isPositiveInteger = value => {
+  return !isNaN(value) && value > 0 && Math.round(value) === value;
+};
+
+export const validatePositiveValue = value => {
+  return isPositiveValue(value) && isFinite(value) ? value : 0;
+};
+
+export const roundToDecimals = (value, decimals) => {
+  return parseFloat(parseFloat(value).toFixed(decimals));
+};
+
+export const validateBurstSetting = (name, value) => {
+  if (name === 'interval' || name === 'fps' || name === 'duration') {
+    return Math.round(value);
+  } else if (name === 'step') {
+    return roundToDecimals(value, 4);
+  }
+  return value;
+};
+
+export const updateBurstState = state => {
+  const { min, max, stepMode, step, interval, fps, duration } = state;
+  if (stepMode === 'MANUAL_STEP_MODE') {
+    state.fps = validatePositiveValue(Math.round(1000 / interval));
+    state.frameCount = validatePositiveValue(Math.round((max - min) / step));
+    state.duration = validatePositiveValue(Math.round(state.frameCount * interval));
+  } else if (stepMode === 'AUTO_STEP_MODE') {
+    state.interval = validatePositiveValue(Math.round(1000 / fps));
+    state.frameCount = validatePositiveValue(Math.round(duration / state.interval));
+    state.step = validatePositiveValue(roundToDecimals((max - min) / state.frameCount, 4));
+  }
+  return state;
 };
 
 export const getBurstErrors = inputs => {
-  const { idx, min, max, step } = inputs;
+  const { idx, min, max, step, interval, fps, duration } = inputs;
   const errors = {};
 
-  for (let prop in inputs) {
-    if (isNaN(inputs[prop])) errors[prop] = true;
-  }
+  if (step !== undefined && !isPositiveValue(step))
+    errors['step'] = true;
+  if (interval !== undefined && !isPositiveValue(interval))
+    errors['interval'] = true;
+  if (fps !== undefined && !isPositiveValue(fps))
+    errors['fps'] = true;
+  if (duration !== undefined && !isPositiveValue(duration))
+    errors['duration'] = true;
 
-  if (!idx) errors.idx = true;
+  if (!idx) errors['idx'] = true;
+  if (!min && min !== 0) errors['min'] = true;
+  if (!max && max !== 0) errors['max'] = true;
   if (min >= max) {
-    errors.min = true;
-    errors.max = true;
+    errors['min'] = true;
+    errors['max'] = true;
   }
-  if (step > max - min) errors.step = true;
+  if (step > max - min) errors['step'] = true;
 
   return errors;
 };

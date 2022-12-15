@@ -208,6 +208,7 @@ export const requestBurst = opts => async (dispatch, getState) => {
     min,
     max,
     step,
+    interval,
     width,
     height,
     oversample,
@@ -230,7 +231,7 @@ export const requestBurst = opts => async (dispatch, getState) => {
   }
 
   // Then check for errors in the settings pane.
-  const settingsErrors = getSettingsErrors({ width, height });
+  const settingsErrors = getSettingsErrors({ width, height, interval });
   if (Object.keys(settingsErrors).length) {
     dispatch(flashError(badSettingsInput(settingsErrors)));
     return;

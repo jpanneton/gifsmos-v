@@ -101,3 +101,10 @@
   max-height: calc(100vh - 70px);
   background: #2e2e2e;
 }
+
+.Burst-radio-group
+{
+  margin: 5px 25px 15px;
+  padding-top: 5px;
+  border: solid 1px #555;
+}

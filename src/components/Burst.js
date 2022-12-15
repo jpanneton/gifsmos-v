@@ -5,7 +5,14 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { getCalcState, setCalcState } from '../lib/calc-helpers';
 import { imageSettingPropTypes } from '../lib/propTypes';
 import { imageSettingDefaults } from '../lib/defaultProps';
-import { getBurstErrors } from '../lib/input-helpers';
+
+import {
+  validatePositiveValue,
+  validateBurstSetting,
+  updateBurstState,
+  getBurstErrors
+} from '../lib/input-helpers';
+
 import './Burst.css';
 import InfoIcon from './InfoIcon';
 
@@ -16,7 +23,12 @@ class Burst extends Component {
       idx: null,
       min: -10,
       max: 10,
+      stepMode: 'MANUAL_STEP_MODE',
       step: 1,
+      interval: 30,
+      fps: 0,
+      duration: 0,
+      frameCount: 0,
       isCapturing: false,
       canUndo: false,
       prevFrames: {},
@@ -24,7 +36,9 @@ class Burst extends Component {
       prevCalcState: {},
       errors: {}
     };
+    this.state = updateBurstState(this.state);
     this.handleInputUpdate = this.handleInputUpdate.bind(this);
+    this.handleStepModeUpdate = this.handleStepModeUpdate.bind(this);
     this.handleRequestBurst = this.handleRequestBurst.bind(this);
     this.handleUndoBurst = this.handleUndoBurst.bind(this);
   }
@@ -42,13 +56,24 @@ class Burst extends Component {
     const {
       target: { name, value }
     } = evt;
-    const { errors, ...newState } = this.state;
+    let newState = this.state;
     const val = name === 'idx' ? parseInt(value, 10) : parseFloat(value);
 
-    newState[name] = val;
+    newState[name] = validateBurstSetting(name, val);
+    newState = updateBurstState(newState);
     newState.errors = getBurstErrors(newState);
 
-    this.setState(newState);
+    this.setState(newState, () => {
+      if (!this.state.errors.interval) {
+        this.props.updateSetting('interval', this.state.interval);
+      }
+    });
+  }
+
+  handleStepModeUpdate(evt) {
+    this.setState({
+      stepMode: evt.currentTarget.value,
+    });
   }
 
   async handleRequestBurst() {
@@ -89,7 +114,8 @@ class Burst extends Component {
   }
 
   render() {
-    const { idx, min, max, step, errors } = this.state;
+    const { idx, min, max, stepMode, step, errors } = this.state;
+    const { interval, fps, duration, frameCount } = this.state;
     const { expanded, burstSliders } = this.props;
     const burstInfo = `Burst allows you to generate multiple snapshots
       of your graph at one time. Enter the relevant info in the input fields
@@ -109,7 +135,7 @@ class Burst extends Component {
           </div>
           <div className="Burst-options-container">
             <div className="Burst-dropdown-container">
-              <div data-testid="Burst-slider-index-label">Slider</div>
+              <div>Slider</div>
               <select
                 className={classNames('Burst-dropdown', {
                   'Burst-input-error': !!errors.idx
@@ -138,7 +164,7 @@ class Burst extends Component {
                 })}
               </select>
             </div>
-            <div data-testid="Burst-slider-min-label">Slider Min</div>
+            <div>Slider Min</div>
             <input
               className={classNames('Burst-input', {
                 'Burst-input-error': !!errors.min
@@ -149,7 +175,7 @@ class Burst extends Component {
               value={isNaN(min) ? '' : min}
               onChange={this.handleInputUpdate}
             />
-            <div data-testid="Burst-slider-max-label">Slider Max</div>
+            <div>Slider Max</div>
             <input
               className={classNames('Burst-input', {
                 'Burst-input-error': !!errors.max
@@ -160,18 +186,84 @@ class Burst extends Component {
               value={isNaN(max) ? '' : max}
               onChange={this.handleInputUpdate}
             />
-            <div data-testid="Burst-slider-step-label">Slider Step</div>
-            <input
-              className={classNames('Burst-input', {
-                'Burst-input-error': !!errors.step
-              })}
-              type="number"
-              name="step"
-              aria-label="slider step"
-              value={isNaN(step) ? '' : step}
-              onChange={this.handleInputUpdate}
-            />
             <div>
+              <input
+                type="radio"
+                name="step-mode-radio-group"
+                aria-label="manual step mode"
+                value="MANUAL_STEP_MODE"
+                checked={stepMode === "MANUAL_STEP_MODE"}
+                onChange={this.handleStepModeUpdate}
+              />
+              <span>Manual Step</span>
+            </div>
+            <div className={classNames('Burst-radio-group', {
+                'disabled-feature': stepMode !== "MANUAL_STEP_MODE"
+            })}>
+              <div>Slider Step</div>
+              <input
+                className={classNames('Burst-input', {
+                  'Burst-input-error': !!errors.step
+                })}
+                type="number"
+                name="step"
+                aria-label="slider step"
+                value={validatePositiveValue(step) ? step : ''}
+                onChange={this.handleInputUpdate}
+              />
+              <div>Interval (ms)</div>
+              <input
+                className={classNames('Burst-input', {
+                  'Burst-input-error': !!errors.interval
+                })}
+                type="number"
+                name="interval"
+                aria-label="frame interval"
+                value={validatePositiveValue(interval) ? interval : ''}
+                onChange={this.handleInputUpdate}
+              />
+            </div>
+            <div>
+              <input
+                type="radio"
+                name="step-mode-radio-group"
+                aria-label="automatic step mode"
+                value="AUTO_STEP_MODE"
+                checked={stepMode === "AUTO_STEP_MODE"}
+                onChange={this.handleStepModeUpdate}
+              />
+              <span>Auto Step</span>
+            </div>
+            <div className={classNames('Burst-radio-group', {
+                'disabled-feature': stepMode !== "AUTO_STEP_MODE"
+            })}>
+              <div>Target FPS</div>
+              <input
+                className={classNames('Burst-input', {
+                  'Burst-input-error': !!errors.fps
+                })}
+                type="number"
+                name="fps"
+                aria-label="animation target fps"
+                value={validatePositiveValue(fps) ? fps : ''}
+                onChange={this.handleInputUpdate}
+              />
+              <div>Duration (ms)</div>
+              <input
+                className={classNames('Burst-input', {
+                  'Burst-input-error': !!errors.duration
+                })}
+                type="number"
+                name="duration"
+                aria-label="frame animation duration"
+                value={validatePositiveValue(duration) ? duration : ''}
+                onChange={this.handleInputUpdate}
+              />
+            </div>
+            <div>
+              Frame Count: {isNaN(frameCount) ? 0 : Math.round(frameCount)}
+            </div>
+            <div className={Object.keys(errors).length === 0 ? null : 'disabled-feature'}>
               <button
                 className={classNames('Burst-button', {
                   capturing: this.state.isCapturing

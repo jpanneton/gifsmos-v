@@ -58,8 +58,16 @@ export default class HelpModal extends Component {
               slider values you want to capture.
               <h5>Slider Min</h5>The first slider value to capture.
               <h5>Slider Max</h5>The last slider value to capture.
-              <h5>Slider Step</h5>How much to increment the slider in between
-              captures.
+              <h5>Manual Step</h5>Mode to manually control slider steps and
+              frame interval.
+              <h6>Slider Step</h6>How much to increment the slider in-between
+              captures (controls the smoothness of the animation).
+              <h6>Interval</h6>How much time to wait in-between captures
+              (controls the speed of the animation).
+              <h5>Auto Step</h5>Mode to automatically calculate slider steps
+              and frame interval based on target animation FPS and duration.
+              <h6>Target FPS</h6>Target animation FPS.
+              <h6>Duration</h6>Target animation duration.
               <p>
                 Finally, click the "Capture" button, and GIFsmos V will
                 automatically capture one snapshot for each slider value defined
@@ -71,7 +79,7 @@ export default class HelpModal extends Component {
                 preview your future SVG animation either by scrubbing through the
                 snapshots with the slider, or by clicking the play/pause button on
                 the preview image. The animation will run at (roughly) a speed
-                determined by the "Interval" option in the settings panel, so it
+                determined by the "Interval" option in the burst panel, so it
                 will give you a good idea what the final SVG animation will look
                 like.
               </p>
@@ -79,8 +87,8 @@ export default class HelpModal extends Component {
               <p>
                 Click the settings button to open the settings panel. There you
                 can set the desired image dimensions (applies to both the captured
-                snapshots and the final SVG animation), as well as the interval
-                between frames in the generated SVG.
+                snapshots and the final SVG animation), as well as the viewport
+                computing strategy.
               </p>
               <h3>Generating and downloading a SVG</h3>
               <p>

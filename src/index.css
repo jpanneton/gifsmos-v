@@ -18,6 +18,12 @@ code {
   height: 100%;
 }
 
-.disabled-feature {
+.disabled-feature
+{
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.removed-feature {
   display: none;
 }

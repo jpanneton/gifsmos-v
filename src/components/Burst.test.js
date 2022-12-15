@@ -21,7 +21,12 @@ describe('<Burst/>', () => {
     const sliderIndexLabel = getByText('Slider');
     const sliderMinLabel = getByText('Slider Min');
     const sliderMaxLabel = getByText('Slider Max');
+    const manualStepRadio = getByText('Manual Step');
     const sliderStepLabel = getByText('Slider Step');
+    const intervalLabel = getByText('Interval (ms)');
+    const autoStepRadio = getByText('Auto Step');
+    const targetFpsLabel = getByText('Target FPS');
+    const durationLabel = getByText('Duration (ms)');
     // check that labels have correct corresponding inputs
     expect(sliderIndexLabel.nextSibling.name).toBe('idx');
     expect(sliderIndexLabel.nextSibling.tagName).toBe('SELECT');
@@ -32,8 +37,36 @@ describe('<Burst/>', () => {
     expect(sliderMaxLabel.nextSibling.name).toBe('max');
     expect(sliderMaxLabel.nextSibling.type).toBe('number');
 
+    expect(manualStepRadio.previousSibling.name).toBe('step-mode-radio-group');
+    expect(manualStepRadio.previousSibling.type).toBe('radio');
+
     expect(sliderStepLabel.nextSibling.name).toBe('step');
     expect(sliderStepLabel.nextSibling.type).toBe('number');
+
+    expect(intervalLabel.nextSibling.name).toBe('interval');
+    expect(intervalLabel.nextSibling.type).toBe('number');
+
+    expect(autoStepRadio.previousSibling.name).toBe('step-mode-radio-group');
+    expect(autoStepRadio.previousSibling.type).toBe('radio');
+
+    expect(targetFpsLabel.nextSibling.name).toBe('fps');
+    expect(targetFpsLabel.nextSibling.type).toBe('number');
+
+    expect(durationLabel.nextSibling.name).toBe('duration');
+    expect(durationLabel.nextSibling.type).toBe('number');
+  });
+
+  it('updates state on input change', () => {
+    const updateSetting = jest.fn();
+    const { container } = render(
+      <Burst expanded updateSetting={updateSetting} />
+    );
+
+    fireEvent.change(container.querySelector('input[name="interval"]'), {
+      target: { value: '200' }
+    });
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
   });
 
   it('has a functioning capture button', async () => {

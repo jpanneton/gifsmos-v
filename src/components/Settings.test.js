@@ -20,7 +20,6 @@ describe('<Settings/>', () => {
     // grab labels
     const widthLabel = getByText('Image Width');
     const heightLabel = getByText('Image Height');
-    const intervalLabel = getByText('Interval (ms)');
     const oversampleLabel = getByText('Oversample');
     const strategyBoundLabel = getByText('Strategy');
 
@@ -30,9 +29,6 @@ describe('<Settings/>', () => {
 
     expect(heightLabel.nextSibling.name).toBe('height');
     expect(heightLabel.nextSibling.type).toBe('number');
-
-    expect(intervalLabel.nextSibling.name).toBe('interval');
-    expect(intervalLabel.nextSibling.type).toBe('number');
 
     expect(oversampleLabel.previousSibling.name).toBe('oversample');
     expect(oversampleLabel.previousSibling.type).toBe('checkbox');
@@ -53,14 +49,11 @@ describe('<Settings/>', () => {
     fireEvent.change(container.querySelector('input[name="height"]'), {
       target: { value: '200' }
     });
-    fireEvent.change(container.querySelector('input[name="interval"]'), {
-      target: { value: '200' }
-    });
     fireEvent.click(container.querySelector('input[name="oversample"]'));
     fireEvent.change(container.querySelector('select[name="strategy"]'), {
       target: { value: 'stretch' }
     });
 
-    expect(updateSetting).toHaveBeenCalledTimes(5);
+    expect(updateSetting).toHaveBeenCalledTimes(4);
   });
 });

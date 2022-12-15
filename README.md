@@ -79,12 +79,17 @@ GIFsmos V also has a multi-capture mode that lets you generate multiple
 snapshots from a slider in the graphing calculator. Open the multi-capture panel
 and enter the relevant information in the input fields:
 
-| Option           | Description                                                                     |
-| ---------------- | ------------------------------------------------------------------------------- |
-| **Slider Index** | the index of the expression that contains the slider values you want to capture |
-| **Slider Min**   | the first slider value to capture                                               |
-| **Slider Max**   | the last slider value to capture                                                |
-| **Slider Step**  | how much to increment the slider in between captures                            |
+| Option        | Description                                                                                                |
+| ------------- | ---------------------------------------------------------------------------------------------------------- |
+| Slider Index  | The index of the expression that contains the slider values you want to capture                            |
+| Slider Min    | The first slider value to capture                                                                          |
+| Slider Max    | The last slider value to capture                                                                           |
+| *Manual Step* | Mode to manually control slider steps and frame interval                                                   |
+| Slider Step   | How much to increment the slider in-between captures (controls the smoothness of the animation)            |
+| Interval      | How much time to wait in-between captures (controls the speed of the animation)                            |
+| *Auto Step*   | Mode to automatically calculate slider steps and frame interval based on target animation FPS and duration |
+| Target FPS    | Target animation FPS                                                                                       |
+| Duration      | Target animation duration                                                                                  |
 
 Finally, click the "Capture" button, and GIFsmos V will automatically capture one
 snapshot for each slider value defined by the min, max, and step.
@@ -94,15 +99,15 @@ snapshot for each slider value defined by the min, max, and step.
 Click the preview button to open the preview panel. You can preview your future
 SVG animation either by scrubbing through the snapshots with the slider, or by clicking
 the play/pause button on the preview image. The animation will run at (roughly) a speed
-determined by the "Interval" option in the settings panel, so it will give you a
-good idea what the final SVG animation will look like.
+determined by the "Interval" option in the burst panel, so it will give you a
+good idea of what the final SVG animation will look like.
 
 ### Adjusting image settings
 
 Click the settings button to open the settings panel. There you can set the
 desired image dimensions which will affect how the elements are scaled within the graph
-(applies to both the captured snapshots and the final SVG animation),
-as well as the interval between frames in the generated SVG.
+(applies to both the captured snapshots and the final SVG animation), as well as the
+viewport computing strategy.
 
 ### Generating and downloading a SVG
 

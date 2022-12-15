@@ -235,13 +235,14 @@ describe('Action creators', () => {
 
     it('return an action to request a burst of frames from the calculator', () => {
       const opts = {
+        width: 300,
         height: 300,
         idx: 1,
         max: 3,
         min: -3,
-        oversample: false,
         step: 1,
-        width: 300,
+        interval: 30,
+        oversample: false,
         frameIDs: [0, 1, 2],
         mode: 'contain',
         left: -10,

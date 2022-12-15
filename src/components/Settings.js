@@ -34,12 +34,12 @@ class Settings extends Component {
   }
 
   render() {
-    const { expanded, width, height, oversample, interval } = this.props;
+    const { expanded, width, height, oversample } = this.props;
 
     if (!expanded) return <div className="Settings" />;
 
     const settingsText = `The settings panel allows you to set your desired image dimensions 
-                          as well as the interval between frames in the generated GIF.`;
+                          as well as the viewport computing strategy.`;
     return (
       <div
         className={classNames('Settings', { 'Settings-expanded': expanded })}
@@ -78,18 +78,6 @@ class Settings extends Component {
               onChange={this.handleInputUpdate}
             />
 
-            <div>Interval (ms)</div>
-            <input
-              className={classNames('Settings-input', {
-                'Settings-input-error': !isPositiveInteger(interval)
-              })}
-              type="number"
-              name="interval"
-              aria-label="frame interval"
-              value={isNaN(interval) ? '' : interval}
-              onChange={this.handleInputUpdate}
-            />
-
             <div>Strategy</div>
             <select
               className="Settings-dropdown"
@@ -106,7 +94,7 @@ class Settings extends Component {
             </select>
           </div>
 
-          <div className="disabled-feature">
+          <div className="removed-feature">
             <input
               type="checkbox"
               name="oversample"
