@@ -62,12 +62,14 @@ export default class HelpModal extends Component {
               frame interval.
               <h6>Slider Step</h6>How much to increment the slider in-between
               captures (controls the smoothness of the animation).
-              <h6>Interval</h6>How much time to wait in-between captures
+              <h6>Interval</h6>How much time to wait in-between captures in ms
               (controls the speed of the animation).
               <h5>Auto Step</h5>Mode to automatically calculate slider steps
               and frame interval based on target animation FPS and duration.
               <h6>Target FPS</h6>Target animation FPS.
-              <h6>Duration</h6>Target animation duration.
+              <h6>Duration</h6>Target animation duration in ms.
+              <h6>Ease Slope</h6>Slider step ease factor (default = linear).
+              <h6>Ease Pos</h6>Slider step ease timing (default = center).
               <p>
                 Finally, click the "Capture" button, and GIFsmos V will
                 automatically capture one snapshot for each slider value defined

@@ -108,3 +108,11 @@
   padding-top: 5px;
   border: solid 1px #555;
 }
+
+.Burst-plot {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: 10px;
+  background: #1e1e1e;
+}

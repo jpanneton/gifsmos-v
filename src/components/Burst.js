@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Plot from '../components/Plot';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { getCalcState, setCalcState } from '../lib/calc-helpers';
 import { imageSettingPropTypes } from '../lib/propTypes';
 import { imageSettingDefaults } from '../lib/defaultProps';
+import { easeFunction } from '../lib/math-helpers';
 
 import {
   validatePositiveValue,
@@ -28,6 +30,8 @@ class Burst extends Component {
       interval: 30,
       fps: 0,
       duration: 0,
+      easeSlope: 0.01,
+      easePosition: 0.5,
       frameCount: 0,
       isCapturing: false,
       canUndo: false,
@@ -116,6 +120,7 @@ class Burst extends Component {
   render() {
     const { idx, min, max, stepMode, step, errors } = this.state;
     const { interval, fps, duration, frameCount } = this.state;
+    const { easeSlope, easePosition } = this.state;
     const { expanded, burstSliders } = this.props;
     const burstInfo = `Burst allows you to generate multiple snapshots
       of your graph at one time. Enter the relevant info in the input fields
@@ -260,6 +265,35 @@ class Burst extends Component {
                 onChange={this.handleInputUpdate}
               />
             </div>
+            <Plot
+              className='Burst-plot'
+              fn={x => easeFunction(x, easeSlope, easePosition)}
+              thickness={4}
+            />
+            <div>Ease Slope</div>
+            <input
+              className="Burst-input"
+              type="range"
+              name="easeSlope"
+              aria-label="ease slope"
+              min="0.01"
+              max="30"
+              step="0.3"
+              defaultValue={easeSlope}
+              onChange={this.handleInputUpdate}
+            />
+            <div>Ease Pos</div>
+            <input
+              className="Burst-input"
+              type="range"
+              name="easePosition"
+              aria-label="ease position"
+              min="0"
+              max="1"
+              step="0.01"
+              defaultValue={easePosition}
+              onChange={this.handleInputUpdate}
+            />
             <div>
               Frame Count: {isNaN(frameCount) ? 0 : Math.round(frameCount)}
             </div>

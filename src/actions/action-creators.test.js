@@ -242,6 +242,8 @@ describe('Action creators', () => {
         min: -3,
         step: 1,
         interval: 30,
+        easeSlope: 0.01,
+        easePosition: 0.5,
         oversample: false,
         frameIDs: [0, 1, 2],
         mode: 'contain',

@@ -84,12 +84,14 @@ and enter the relevant information in the input fields:
 | Slider Index  | The index of the expression that contains the slider values you want to capture                            |
 | Slider Min    | The first slider value to capture                                                                          |
 | Slider Max    | The last slider value to capture                                                                           |
-| *Manual Step* | Mode to manually control slider steps and frame interval                                                   |
+| Manual Step   | Mode to manually control slider steps and frame interval                                                   |
 | Slider Step   | How much to increment the slider in-between captures (controls the smoothness of the animation)            |
-| Interval      | How much time to wait in-between captures (controls the speed of the animation)                            |
-| *Auto Step*   | Mode to automatically calculate slider steps and frame interval based on target animation FPS and duration |
+| Interval      | How much time to wait in-between captures in ms (controls the speed of the animation)                      |
+| Auto Step     | Mode to automatically calculate slider steps and frame interval based on target animation FPS and duration |
 | Target FPS    | Target animation FPS                                                                                       |
-| Duration      | Target animation duration                                                                                  |
+| Duration      | Target animation duration in ms                                                                            |
+| Ease Slope    | Slider step ease factor (default = linear)                                                                 |
+| Ease Pos      | Slider step ease timing (default = center)                                                                 |
 
 Finally, click the "Capture" button, and GIFsmos V will automatically capture one
 snapshot for each slider value defined by the min, max, and step.

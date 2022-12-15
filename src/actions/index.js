@@ -38,6 +38,7 @@ import {
 import { createAnimatedSVG, createSVG } from '../lib/svgasm';
 import { createMOV, createPNG } from '../lib/movasm';
 import { startTimer, clearTimer } from '../lib/timer';
+import { easeFunction } from '../lib/math-helpers';
 
 import {
   gifCreationProblem,
@@ -209,6 +210,8 @@ export const requestBurst = opts => async (dispatch, getState) => {
     max,
     step,
     interval,
+    easeSlope,
+    easePosition,
     width,
     height,
     oversample,
@@ -241,7 +244,12 @@ export const requestBurst = opts => async (dispatch, getState) => {
   let imageData;
   let sliderErrorMessage;
   for (let val = min; val <= max; val += step) {
-    sliderErrorMessage = setSliderByIndex(idx, val);
+    const interpolatedValue = min + easeFunction(
+      (val - min) / (max - min),
+      easeSlope,
+      easePosition
+    ) * (max - min);
+    sliderErrorMessage = setSliderByIndex(idx, interpolatedValue);
     if (sliderErrorMessage) {
       dispatch(flashError(sliderErrorMessage));
       return;
