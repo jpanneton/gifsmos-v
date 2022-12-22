@@ -92,6 +92,14 @@ export default class HelpModal extends Component {
                 snapshots and the final SVG animation), as well as the viewport
                 computing strategy.
               </p>
+              <p>
+                If the "Oversample" option is checked, images will be captured
+                at double the resolution without changing the nominal viewport
+                dimensions. For instance, an oversampled 300x300 image will actually
+                result in a 600x600 image. Note that this setting may not be as
+                useful when exporting SVG animations, since they are naturally
+                vectorial and may be resized losslessly anyway.
+              </p>
               <h3>Generating and downloading a SVG</h3>
               <p>
                 Inside the preview panel, once you're happy with the results,

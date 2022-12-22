@@ -111,6 +111,12 @@ desired image dimensions which will affect how the elements are scaled within th
 (applies to both the captured snapshots and the final SVG animation), as well as the
 viewport computing strategy.
 
+If the "Oversample" option is checked, images will be captured at double the
+resolution without changing the nominal viewport dimensions. For instance,
+an oversampled 300x300 image will actually result in a 600x600 image.
+Note that this setting may not be as useful when exporting SVG animations,
+since they are naturally vectorial and may be resized losslessly anyway.
+
 ### Generating and downloading a SVG
 
 Inside the preview panel, once you're happy with the results, click the
