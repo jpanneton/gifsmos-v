@@ -22,7 +22,7 @@ class Burst extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      idx: null,
+      sliderID: null,
       min: -10,
       max: 10,
       stepMode: 'MANUAL_STEP_MODE',
@@ -51,8 +51,28 @@ class Burst extends Component {
     if (this.props.frameIDs.length !== prevProps.frameIDs.length) {
       this.setState({ canUndo: false });
     }
-    if (this.props.burstSliders.length && prevProps.burstSliders.length === 0) {
-      this.setState({ idx: this.props.burstSliders[0].expressionIdx });
+
+    // Update slider ID
+    let newSliderID = undefined;
+    if (this.props.burstSliders.length && !prevProps.burstSliders.length) {
+      // If slider count was = 0 and now is > 0
+      newSliderID = this.props.burstSliders[0].id;
+    } else if (!this.props.burstSliders.length && prevProps.burstSliders.length) {
+      // If slider count was > 0 and now is = 0
+      newSliderID = null;
+    } else if (this.state.sliderID !== null) {
+      if (!this.props.burstSliders.find(exp => exp.id === this.state.sliderID)) {
+        // If selected slider has been removed
+        newSliderID = this.props.burstSliders[0].id;
+      }
+    }
+    if (newSliderID !== undefined) {
+      this.handleInputUpdate({
+        target: {
+          name: 'sliderID',
+          value: newSliderID
+        }
+      });
     }
   }
 
@@ -61,7 +81,7 @@ class Burst extends Component {
       target: { name, value }
     } = evt;
     let newState = this.state;
-    const val = name === 'idx' ? parseInt(value, 10) : parseFloat(value);
+    const val = name === 'sliderID' ? value : parseFloat(value);
 
     newState[name] = validateBurstSetting(name, val);
     newState = updateBurstState(newState);
@@ -118,7 +138,7 @@ class Burst extends Component {
   }
 
   render() {
-    const { idx, min, max, stepMode, step, errors } = this.state;
+    const { sliderID, min, max, stepMode, step, errors } = this.state;
     const { interval, fps, duration, frameCount } = this.state;
     const { easeSlope, easePosition } = this.state;
     const { expanded, burstSliders } = this.props;
@@ -143,27 +163,24 @@ class Burst extends Component {
               <div>Slider</div>
               <select
                 className={classNames('Burst-dropdown', {
-                  'Burst-input-error': !!errors.idx
+                  'Burst-input-error': !!errors.sliderID
                 })}
-                name="idx"
-                aria-label="slider index"
-                value={idx ? idx : undefined}
+                name="sliderID"
+                aria-label="slider id"
+                value={sliderID !== null ? sliderID : undefined}
                 onChange={this.handleInputUpdate}
               >
-                {!burstSliders.length ? (
+                {sliderID === null ? (
                   <option value={undefined}>No Sliders</option>
                 ) : null}
-                {burstSliders.map(exp => {
+                {sliderID !== null && burstSliders.map(exp => {
                   return (
                     <option
                       key={`slider-${exp.id}`}
-                      value={exp.expressionIdx}
-                      defaultValue={idx === exp.expressionIdx}
+                      value={exp.id}
+                      defaultValue={exp.id === sliderID}
                     >
-                      {exp.latex
-                        .replace(/\\/g, '')
-                        .split('=')
-                        .join(' = ')}
+                      {exp.latex.split('=').join(' = ')}
                     </option>
                   );
                 })}
@@ -213,7 +230,7 @@ class Burst extends Component {
                 type="number"
                 name="step"
                 aria-label="slider step"
-                value={validatePositiveValue(step) ? step : ''}
+                value={validatePositiveValue(step) || step === 0 ? step : ''}
                 onChange={this.handleInputUpdate}
               />
               <div>Interval (ms)</div>
@@ -308,18 +325,18 @@ class Burst extends Component {
                 {this.state.isCapturing ? 'Capturing...' : 'Capture'}
               </button>
             </div>
+            {this.state.canUndo ? (
+              <div>
+                <button
+                  className="Burst-button"
+                  onClick={this.handleUndoBurst}
+                  aria-label="undo last burst"
+                >
+                  Undo
+                </button>
+              </div>
+            ) : null}
           </div>
-          {this.state.canUndo ? (
-            <div>
-              <button
-                className="Burst-button"
-                onClick={this.handleUndoBurst}
-                aria-label="undo last burst"
-              >
-                Undo
-              </button>
-            </div>
-          ) : null}
         </OverlayScrollbarsComponent>
       </div>
     );

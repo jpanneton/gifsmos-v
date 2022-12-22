@@ -98,7 +98,7 @@
 }
 
 .Burst-options-container {
-  max-height: calc(100vh - 70px);
+  margin-bottom: 30px;
   background: #2e2e2e;
 }
 

@@ -28,7 +28,7 @@
 
 import * as types from '../constants/action-types';
 import {
-  setSliderByIndex,
+  setSliderByID,
   getImageData,
   getSliderExpressions,
   loadSavedGraph,
@@ -205,7 +205,7 @@ export const requestFrame = opts => async dispatch => {
 
 export const requestBurst = opts => async (dispatch, getState) => {
   const {
-    idx,
+    sliderID,
     min,
     max,
     step,
@@ -227,7 +227,7 @@ export const requestBurst = opts => async (dispatch, getState) => {
   };
 
   // Check for errors in the current pane first.
-  const burstErrors = getBurstErrors({ idx, min, max, step });
+  const burstErrors = getBurstErrors({ sliderID, min, max, step });
   if (Object.keys(burstErrors).length) {
     dispatch(flashError(badBurstInput(burstErrors)));
     return;
@@ -249,7 +249,7 @@ export const requestBurst = opts => async (dispatch, getState) => {
       easeSlope,
       easePosition
     ) * (max - min);
-    sliderErrorMessage = setSliderByIndex(idx, interpolatedValue);
+    sliderErrorMessage = setSliderByID(sliderID, interpolatedValue);
     if (sliderErrorMessage) {
       dispatch(flashError(sliderErrorMessage));
       return;

@@ -28,7 +28,7 @@ describe('<Burst/>', () => {
     const targetFpsLabel = getByText('Target FPS');
     const durationLabel = getByText('Duration (ms)');
     // check that labels have correct corresponding inputs
-    expect(sliderIndexLabel.nextSibling.name).toBe('idx');
+    expect(sliderIndexLabel.nextSibling.name).toBe('sliderID');
     expect(sliderIndexLabel.nextSibling.tagName).toBe('SELECT');
 
     expect(sliderMinLabel.nextSibling.name).toBe('min');

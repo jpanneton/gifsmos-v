@@ -44,26 +44,21 @@ export const getImageData = async opts => {
   return svgData;
 };
 
-/*
- * Note that the array of expressions returned fom the Desmos API is 0-indexed,
- * but the numbering in the calculator UI is 1-indexed. Functions here that
- * accept an expression index as an argument should be 1-indexed so that users
- * can enter numbers that match what they're looking at in the UI.
- */
-const getExpByIndex = idx => calculator.getExpressions()[idx - 1];
+const getExpByID = id => {
+  return calculator.getExpressions().find(exp => exp.id === id);
+};
 
 /**
  * Returns an error message on failure.
  * Skips expressions that are not of type 'expression'
  */
-export const setSliderByIndex = (idx, val) => {
-  const exp = getExpByIndex(idx);
-  if (!exp) return noSuchExpression(idx);
-  if (exp.type !== 'expression') return notASlider(idx);
+export const setSliderByID = (id, val) => {
+  const exp = getExpByID(id);
+  if (!exp) return noSuchExpression(id);
+  if (exp.type !== 'expression') return notASlider(id);
 
-  const { id, latex } = exp;
-  const match = latex.match(/(.+)=/);
-  if (!match) return notASlider(idx);
+  const match = exp.latex.match(/(.+)=/);
+  if (!match) return notASlider(id);
 
   const identifier = match[1];
 
@@ -72,7 +67,7 @@ export const setSliderByIndex = (idx, val) => {
 
 export const getSliderExpressions = () => {
   return calculator.getExpressions().reduce((acc, exp, i) => {
-    return exp.latex.match(/^(?:[a-zA-Z]|\\alpha|\\beta|\\phi|\\tau|\\theta)(?:_{[a-zA-Z0-9]+})?=-?\d+\.?\d*$/)?.length === 1
+    return exp.latex.match(/^(?:[a-zA-Z]|\\alpha|\\beta|\\phi|\\tau|\\theta)(?:_{[a-zA-Z0-9]+})?=-?\d+\.?\d*(?:e(?:\+|-)\d+)?$/)?.length === 1
       ? [...acc, { ...exp, expressionIdx: i + 1 }]
       : acc;
   }, []);

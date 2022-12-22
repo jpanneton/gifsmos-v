@@ -21,7 +21,7 @@ class Settings extends Component {
     } = evt;
 
     const { updateSetting } = this.props;
-    const val = name === 'oversample' ? checked : parseInt(value, 10);
+    const val = name === 'oversample' ? checked : parseInt(value);
     updateSetting(name, val);
   }
 

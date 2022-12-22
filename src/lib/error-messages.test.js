@@ -3,13 +3,13 @@ import * as errors from './error-messages';
 describe('error messages', () => {
   it('return a message for an invalid expression index', () => {
     expect(errors.noSuchExpression(42)).toEqual(
-      'There is no expression at position 42.'
+      'There is no expression with ID 42.'
     );
   });
 
   it('return a message for an expression without a slider', () => {
     expect(errors.notASlider(42)).toEqual(
-      "Looks like expression 42 doesn't define a slider."
+      "Looks like expression with ID 42 doesn't define a slider."
     );
   });
 
@@ -29,7 +29,7 @@ describe('error messages', () => {
     expect(errors.badBurstInput({ step: true })).toEqual(
       "Your Slider Step isn't quite right."
     );
-    expect(errors.badBurstInput({ idx: true, max: true })).toEqual(
+    expect(errors.badBurstInput({ sliderID: true, max: true })).toEqual(
       'Please choose a slider or define an expression.'
     );
     expect(errors.badBurstInput({ min: true, max: true })).toEqual(

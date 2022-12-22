@@ -42,7 +42,7 @@ export const updateBurstState = state => {
 };
 
 export const getBurstErrors = inputs => {
-  const { idx, min, max, step, interval, fps, duration } = inputs;
+  const { sliderID, min, max, step, interval, fps, duration } = inputs;
   const errors = {};
 
   if (step !== undefined && !isPositiveValue(step))
@@ -54,7 +54,7 @@ export const getBurstErrors = inputs => {
   if (duration !== undefined && !isPositiveValue(duration))
     errors['duration'] = true;
 
-  if (!idx) errors['idx'] = true;
+  if (!sliderID) errors['sliderID'] = true;
   if (!min && min !== 0) errors['min'] = true;
   if (!max && max !== 0) errors['max'] = true;
   if (min >= max) {

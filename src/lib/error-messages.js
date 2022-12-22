@@ -5,11 +5,11 @@
  * the error when possible.
  */
 
-export const noSuchExpression = idx =>
-  `There is no expression at position ${idx}.`;
+export const noSuchExpression = id =>
+  `There is no expression with ID ${id}.`;
 
-export const notASlider = idx =>
-  `Looks like expression ${idx} doesn't define a slider.`;
+export const notASlider = id =>
+  `Looks like expression with ID ${id} doesn't define a slider.`;
 
 export const badNameInput = errorMessage =>
   `Invalid name input for saving graph: ${errorMessage}`;
@@ -19,7 +19,7 @@ export const gifCreationProblem = () =>
 
 export const badBurstInput = errors => {
   const propMap = {
-    idx: 'Slider Index',
+    sliderID: 'Slider ID',
     min: 'Slider Min',
     max: 'Slider Max',
     step: 'Slider Step'
@@ -36,13 +36,13 @@ export const badBurstInput = errors => {
       propText = propMap[badProps[0]];
       break;
     case 2:
-      propText = badProps.indexOf('idx') > -1 ? propMap.idx : 'input';
+      propText = badProps.indexOf('sliderID') > -1 ? propMap.sliderID : 'input';
       break;
     default:
       propText = 'input';
   }
 
-  if (propText === propMap.idx)
+  if (propText === propMap.sliderID)
     return `Please choose a slider or define an expression.`;
 
   return `Your ${propText} isn't quite right.`;

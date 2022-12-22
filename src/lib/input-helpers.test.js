@@ -142,19 +142,19 @@ describe('input helpers', () => {
   });
 
   it('detects burst input errors', () => {
-    expect(getBurstErrors({ idx: null, min: -10, max: 10, step: 1 })).toEqual({
-      idx: true
+    expect(getBurstErrors({ sliderID: null, min: -10, max: 10, step: 1 })).toEqual({
+      sliderID: true
     });
-    expect(getBurstErrors({ idx: 1, min: 10, max: 10, step: 1 })).toEqual({
+    expect(getBurstErrors({ sliderID: 1, min: 10, max: 10, step: 1 })).toEqual({
       min: true,
       max: true,
       step: true
     });
-    expect(getBurstErrors({ idx: 1, min: -10, max: 10, step: 21 })).toEqual({
+    expect(getBurstErrors({ sliderID: 1, min: -10, max: 10, step: 21 })).toEqual({
       step: true
     });
-    expect(getBurstErrors({ idx: NaN, min: NaN, max: NaN, step: NaN })).toEqual(
-      { idx: true, min: true, max: true, step: true }
+    expect(getBurstErrors({ sliderID: NaN, min: NaN, max: NaN, step: NaN })).toEqual(
+      { sliderID: true, min: true, max: true, step: true }
     );
   });
 

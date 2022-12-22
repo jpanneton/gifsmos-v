@@ -237,7 +237,7 @@ describe('Action creators', () => {
       const opts = {
         width: 300,
         height: 300,
-        idx: 1,
+        sliderID: 1,
         max: 3,
         min: -3,
         step: 1,

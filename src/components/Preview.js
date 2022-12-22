@@ -24,7 +24,7 @@ class Preview extends Component {
 
   handlePreviewUpdate(evt) {
     const { updatePreviewIdx, stopAnimation } = this.props;
-    const idx = parseInt(evt.target.value, 10);
+    const idx = parseInt(evt.target.value);
     stopAnimation();
     updatePreviewIdx(idx);
   }

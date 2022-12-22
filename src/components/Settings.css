@@ -55,6 +55,6 @@
 }
 
 .Settings-options-container {
-  max-height: calc(100vh - 70px);
+  margin-bottom: 10px;
   background: #2e2e2e;
 }
