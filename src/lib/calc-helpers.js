@@ -67,7 +67,8 @@ export const setSliderByID = (id, val) => {
 
 export const getSliderExpressions = () => {
   return calculator.getExpressions().reduce((acc, exp, i) => {
-    return exp.latex.match(/^(?:[a-zA-Z]|\\alpha|\\beta|\\phi|\\tau|\\theta)(?:_{[a-zA-Z0-9]+})?=-?\d+\.?\d*(?:e(?:\+|-)\d+)?$/)?.length === 1
+    return exp.latex &&
+      exp.latex.match(/^(?:[a-zA-Z]|\\alpha|\\beta|\\phi|\\tau|\\theta)(?:_{[a-zA-Z0-9]+})?=-?\d+\.?\d*(?:e(?:\+|-)\d+)?$/)?.length === 1
       ? [...acc, { ...exp, expressionIdx: i + 1 }]
       : acc;
   }, []);
