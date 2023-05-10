@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/gifsmos-v/static/css/main.ce5ebfa5.css",
-    "main.js": "/gifsmos-v/static/js/main.b128f90c.js",
+    "main.js": "/gifsmos-v/static/js/main.7455cbeb.js",
     "static/media/settings.svg": "/gifsmos-v/static/media/settings.607f75b7e22b4827dffbc1faf4f2924f.svg",
     "static/media/reset.svg": "/gifsmos-v/static/media/reset.e339583cfd3bdabb431b0a27b09c7a1c.svg",
     "static/media/preview.svg": "/gifsmos-v/static/media/preview.a997367d7671db2b278b1bee3de33780.svg",
@@ -14,10 +14,10 @@
     "static/media/left.svg": "/gifsmos-v/static/media/left.8cd18e8bbdb3be521bb73620e76b63e0.svg",
     "static/media/saved.svg": "/gifsmos-v/static/media/saved.c4212f0bf503ed720df99587c273e74a.svg",
     "main.ce5ebfa5.css.map": "/gifsmos-v/static/css/main.ce5ebfa5.css.map",
-    "main.b128f90c.js.map": "/gifsmos-v/static/js/main.b128f90c.js.map"
+    "main.7455cbeb.js.map": "/gifsmos-v/static/js/main.7455cbeb.js.map"
   },
   "entrypoints": [
     "static/css/main.ce5ebfa5.css",
-    "static/js/main.b128f90c.js"
+    "static/js/main.7455cbeb.js"
   ]
 }
